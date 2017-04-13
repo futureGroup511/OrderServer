@@ -47,7 +47,7 @@ public class WinDAOImp extends DAO<BaseGoodsInfo> implements VegetableDAO{
 	}
 	@Override
 	public List<BaseGoodsInfo> getAll(String name) {
-		System.out.println("*********");
+		
 		String sql ="select goodsname,goodsdesc,price from table_win where goodsname like '%"+name+"%' ";
 		return getForList(sql);
 	}
