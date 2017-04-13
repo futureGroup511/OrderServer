@@ -47,7 +47,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <div>
 					  <font color="red"><s:fielderror/> <!-- 显示表单验证的出错信息  对应addFileError --></font>
 				</div>
-                <a href="<%=path %>/WEB-INF/content/zhuce.jsp" target="_blank"><font size="+1">注册</font></a>
+                <a href="${rootPath }zhuce.jsp" target="_blank"><font size="+1">注册</font></a>
                 <div style=" float:right;margin-right:15px;">
                 <!-- ###############################################以后要取消的-->
                 

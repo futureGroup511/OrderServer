@@ -16,7 +16,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    <div class="box">
    
        <div class="tubiao">
-           <img src="images/logo.png" />
+           <a href="${rootPath }"><img src="images/logo.png" /></a>
        </div>
        <div class="content" >
             <div class="zhujiemian">

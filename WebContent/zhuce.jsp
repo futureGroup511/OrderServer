@@ -14,12 +14,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <body>
      <div class="head">
           <div class="szuo">
-              <img src="images/logo.png" />
+              <a href="${rootPath }"><img src="images/logo.png" /></a>
           </div>
           <div class="syou">
-              <a href="index.html"><font>登录</font></a>
+              <a href="index.jsp"><font>登录</font></a>
               <font size="+1" color="#999">|</font>
-              <a href="zhuce.html"><font>注册</font></a>
+              <a href="zhuce.jsp"><font>注册</font></a>
           </div>
      </div>
      <div class="box">
