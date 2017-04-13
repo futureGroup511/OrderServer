@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+	"http://struts.apache.org/dtds/struts-2.1.7.dtd">
+<struts>
+	<!-- <constant name="struts.ui.theme" value="simple"></constant>	自己设置的样式时必须添加此设置 -->
+	<package name="default" namespace="/" extends="struts-default">	
+	</package>
+	<package name="users" namespace="/users" extends="default">
+		<action name="*_*" class="com.order.action.{1}Action" method="{2}">
+			<result name="login_success">/WEB-INF/content/caibiao.jsp</result>
+			<result name="login_failure">/WEB-INF/content/index.jsp</result>
+			<result name="logout_success">/WEB-INF/content/index.jsp</result>
+			<result name="register_success">/WEB-INF/content/index.jsp</result>
+			<result name="register_notequal">/WEB-INF/content/zhuce.jsp</result>
+			<result name="wrong_length">/WEB-INF/content/zhuce.jsp</result>
+			<result name="phone_already">/WEB-INF/content/zhuce.jsp</result>
+			<result name="input">/users/Users_login.jsp</result>
+		</action>
+	</package>
+	<package name="goods" namespace="/goods" extends="struts-default">
+		<action name="*_*" class="com.order.action.{1}Action" method="{2}">
+			<result name="vsqueryall_success">/WEB-INF/content/caibiao.jsp</result>
+			<result name="queryallwin_success">/WEB-INF/content/jiushui.jsp</result>
+			<result name="queryallin_success">/WEB-INF/content/peiliao.jsp</result>
+			<result name="queryallorder_success">/WEB-INF/content/dingdan.jsp</result>
+			<result name="deletevs_success" type="chain">Vs_queryAllVs</result><!-- chain表示一个链接的动作，相当于页面刷新 -->
+			<result name="deletewin_success" type="chain">Win_queryAllWin</result><!-- chain表示一个链接的动作，相当于页面刷新 -->
+			<result name="deletein_success" type="chain">Ingredient_queryallin</result><!-- chain表示一个链接的动作，相当于页面刷新 -->
+			<result name="deleteorder_success" type="chain">Order_queryAllOrder</result><!-- chain表示一个链接的动作，相当于页面刷新 -->
+			<result name="vsaddreflect">/WEB-INF/content/tianjiacaibiao.jsp</result>
+			<result name="winaddreflect">/WEB-INF/content/tianjiajiushui.jsp</result>
+			<result name="vsmodifyreflect">/WEB-INF/content/xiugaicaibiao.jsp</result>
+			<result name="winmodifyreflect">/WEB-INF/content/xiugaijiushui.jsp</result>
+			<result name="inaddreflect">/WEB-INF/content/tianjiapeiliao.jsp</result>
+			<result name="inmodifyreflect">/WEB-INF/content/xiugaipeiliao.jsp</result>
+			<result name="ordermodifyreflect">/WEB-INF/content/xiugaidingdan.jsp</result>
+			
+			<result name="searchvs_success" >/WEB-INF/content/caibiao.jsp</result>
+			<!-- 配置fileUpload的拦截器 -->
+			<interceptor-ref name="fileUpload">
+				<!-- 配置允许上传的文件类型 -->
+				<param name="allowedTypes">image/png,image/jpg,image/jpeg</param>
+				<!-- 配置允许上传的文件的大小 -->
+				<!-- <param name="maximumSize">4096</param> 不添加此设置默认上传文件最大值为2M-->
+			</interceptor-ref>
+			<!-- 配置默认的拦截器 -->
+			<interceptor-ref name="defaultStack"/>
+			<!-- 动态设置Action的属性值 -->
+			<param name="savePath">D:\webworkplace\OrderServer\WebContent\goodsimages</param>
+			
+			<result name="uploadvs_success" type="chain">Vs_queryAllVs</result><!-- chain表示一个链接的动作，相当于页面刷新 -->
+			<result name="addingredient_success" type="chain">Ingredient_queryallin</result><!-- chain表示一个链接的动作，相当于页面刷新 -->
+			<result name="input" type="chain">Vs_queryAllVs</result>
+			
+			<result name="searchwin_success">/WEB-INF/content/jiushui.jsp</result>
+			<result name="searchin_success">/WEB-INF/content/peiliao.jsp</result>
+			<result name="searchorder_success">/WEB-INF/content/dingdan.jsp</result>
+			<result name="reflectfinance">/WEB-INF/content/caiwu.jsp</result>
+			
+			<result name="reflectvsin">/WEB-INF/content/vs_ingredient.jsp</result>
+			<result name="addrelative_success">/WEB-INF/content/vs_ingredient.jsp</result>
+		</action>
+	</package>
+	
+	<package name="finance" namespace="/finance" extends="default">
+		<action name="*_*" class="com.order.action.{1}Action" method="{2}">
+			<result name="queryfin_success">/WEB-INF/content/caiwu.jsp</result>
+			
+			<result name="input">/users/Users_login.jsp</result>
+			
+		</action>
+	</package>
+	
+	<package name="client" namespace="/client" extends="default">
+		<action name="*_*" class="com.order.action.client.{1}Action" method="{2}">
+			<!-- <result name="queryfin_success">/WEB-INF/content/caiwu.jsp</result> -->
+			
+			<!-- <result name="input">/users/Users_login.jsp</result> -->
+			
+		</action>
+	</package>
+	<package name="cook" namespace="/cook" extends="default">
+		<action name="*_*" class="com.order.action.cook.{1}Action" method="{2}">
+			<!-- <result name="queryfin_success">/WEB-INF/content/caiwu.jsp</result> -->
+			
+			<!-- <result name="input">/users/Users_login.jsp</result> -->
+			
+		</action>
+	</package>
+	
+	
+</struts>

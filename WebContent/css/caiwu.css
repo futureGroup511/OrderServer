@@ -1,0 +1,12 @@
+@charset "utf-8";
+/* CSS Document */
+body{
+	margin:0px;
+}
+.box{
+	margin-top:40px;
+	margin-left:100px;
+	background:#999;
+	border:1px solid #999;
+}
+

@@ -1,0 +1,102 @@
+@charset "utf-8";
+/* CSS Document */
+body{
+	margin:0px;
+	width:1350px;
+	border:1px solid #b9c5c9; 
+	background:url(../images/beijing.gif)
+}
+a{
+	text-decoration:none;
+	color:#858585;
+}
+a:hover{
+	color:#4C9ED9;
+}
+.zuos{
+	margin:0px;
+	border-right:1px solid #b9c5c9;
+	/*background: #aabbcc;*/
+	float: left;
+	width: 149px;
+	height: 100px;
+    background:url(../images/xiaobeijing.png);
+}
+.zsrentou{
+	margin-top: 20px;
+	width: 80px;
+	height: 65px;
+    float: left;
+	
+	/*background: #aabbcc;*/
+}
+.zsyonghu{
+	padding-top:25px;
+	float: left;
+	margin-left:2px;
+	width: 65px;
+}
+.yous{
+	margin:0px;
+	/*background: #666666;*/
+	float: left;
+	width: 1200px;
+	height: 100px;
+	background:url(../images/dabeijing.png);
+	
+}
+.sousuo{
+	margin-left:20px;
+	margin-top:30px;
+	width:800px;
+	height:60px;
+	float:left;
+}
+.ystime{
+	margin-top:30px;
+	margin-right: 50px;
+	float: right;
+	width:200px;
+	height:50px;
+	
+}
+.zuox{
+	/*! padding-top:30px; */
+	border-right:1px solid #b9c5c9;
+	/*background: #FF0012;*/
+	width: 149px;
+	height: 500px;
+	float: left;
+	
+}
+.youx{
+	margin:0px;
+	/*background: #52ED1A;*/
+	width: 1150px;
+	height:500px;
+	float: left;
+}
+.yxbiaoge{
+	width: 1000px;
+	margin-top:40px;
+	margin-left:100px;
+	margin-right: 0px;
+}
+.yxdz{
+	margin-top:20px;
+	margin-left: 100px;
+	width: 300px;
+	float:left;
+	/*! background:#ccc; */
+	/*! height: 100px; */
+}
+.yxdy{
+	float:right;
+	width:400px;
+	/*! height:100px; */
+	margin-right: 300px;
+	margin-top:20px;
+	
+    /*! background:#090; */ 
+}
+

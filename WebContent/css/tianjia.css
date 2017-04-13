@@ -1,0 +1,19 @@
+@charset "utf-8";
+/* CSS Document */
+body{
+	margin:0px;
+}
+.box{
+	margin:30px;
+	border:1px solid #999;
+	width:440px;
+	height:300px;
+}
+.xinxi{
+	margin:20px;
+}
+.anniu{
+	margin-top:0px;
+	margin-right:40px;
+	float:right;
+}

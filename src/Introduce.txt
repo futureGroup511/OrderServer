@@ -1,0 +1,18 @@
+1、总体传送的JSONArray total_JSONArray,里面封装的是每一个桌号对应的菜和桌号相关的信息ItemsJSONArray
+2、ItemsJSONArray中封装（0）：桌号；  （1）状态 ；      （2）每桌对应的所有的菜    （3）每桌对应菜的数量
+
+
+JSONArray 
+   itemsJSONArray
+   	 getString(0) 桌号
+   	 getString(1) 卓号对应的状态
+   	 getJSONArray(2)每一个桌子对应的菜
+   	 getJSONArray(3)每一个桌子对应菜的数量
+   	 
+访问地址		//如果是外网访问则需要相对应的域名
+登录    http://localhost:8080/OrderServer/cook/Cook_login
+注册   http://localhost:8080/OrderServer/cook/Cook_register
+获取数据  :    http://localhost:8080/OrderServer/cook/Cook_getData
+修改进度：		 http://localhost:8080/OrderServer/cook/Cook_modifyProgress
+
+   	 

@@ -1,0 +1,100 @@
+@charset "utf-8";
+/* CSS Document */
+
+body{
+	margin:0px;
+	width:1310px;
+	background: url(../images/xiaobeijing.jpg);
+}
+a{
+	text-decoration:none;
+	color:#858585;
+}
+a:hover{
+	color:#F00;
+}
+.head{
+	margin:0px;
+	width:1345px;
+	height:70px;
+	background:#F7F7F7;
+	/*border:1px solid red;*/
+}
+.szuo{
+	/*! margin-left: 50px; */
+	padding-left:20px;
+	padding-top: 2px;
+	width: 250px;
+	float:left;
+	/*border:1px solid red;*/
+}
+.syou{
+	padding-right:80px;
+	padding-top: 25px;
+	width: 100px;
+	float: right;
+	/*border:1px solid red;*/
+}
+.box{
+	width:650px;
+	height:420px;
+	margin-top:100px;
+	margin-bottom:75px;
+	margin-left:400px;
+	margin-right:550px;
+	/*border:1px solid red;*/
+	background:url(../images/zhuce.png);
+}
+.zhuce{
+	margin-left:70px;
+	margin-top:40px;
+	width: 100px;
+	padding-top: 40px;
+	/*border:1px solid red;*/
+}
+.main{
+	margin-left:100px;
+	margin-top:10px;
+	width:400px;
+	height: 300px;
+	padding:10px;
+	/*border:1px solid red;*/
+}
+input.rounded {
+        border:0px;  
+		background-image: url(../images/yuanjiao1.png);  
+		background-repeat:no-repeat;  /*背景图片不重复*/
+		/*! background-position-x:right; */  
+		padding-left:12px;  /*输入框里面的字体离输入框的距离*/
+		font-size:15px;  
+		
+		width:300px;/*输入框的大，小字体颜色*/
+		height:30px;
+		color:#999; 
+		background-color:transparent;/*输入框自带的白色背景变成透明*/
+		outline:0;/*360一点输入框自动出来的边框取消*/
+		  
+}
+.text{
+	width:70px;
+	height:50px;
+	/*! margin: 1px; */
+	float:left;
+}
+.input{
+	width:300px;
+	height:50px;
+	float:left;
+}
+.button{
+	margin:60px;
+	border-radius:20px;
+	width: 70px;
+	height:35px;
+	border:0px;
+    background-color:#6EA7EB;
+}
+.ziti{
+	font-size:18px;
+	color:#6F6F6F;
+}
