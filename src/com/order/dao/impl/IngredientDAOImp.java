@@ -46,8 +46,9 @@ public class IngredientDAOImp extends DAO<Ingredient> implements IngredientDAO{
 
 	@Override
 	public List<Ingredient> getAll(String goodsname) {
-		String sql ="select goodsname,goodssource,buyindate,price,num from ingredient where goodsname=?";
-		return getForList(sql,goodsname);
+		System.out.println("*********");
+		String sql ="select goodsname,goodssource,buyindate,price,num from ingredient where goodsname like '%"+goodsname+"%'";
+		return getForList(sql);
 	}
 	@Override
 	public List<Ingredient> getPage(int pageNo,int pageSize) {

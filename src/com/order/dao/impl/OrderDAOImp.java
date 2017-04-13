@@ -48,6 +48,7 @@ public class OrderDAOImp extends DAO<Order> implements OrderDAO{
 
 	@Override
 	public List<Order> getAll(int tablenum) {
+		
 		String sql ="select tablenum,ordercount,orderdate from allorder where tablenum =?";
 		return getForList(sql,tablenum);
 	}
