@@ -29,6 +29,7 @@ public class SearchAction extends SuperAction{
 				
 				if (searchvs(keyname)!=null && searchvs(keyname).size() != 0) {
 					reques.setAttribute("vegetables", searchvs(keyname));
+					reques.setAttribute("search", "search");
 					return "searchvs_success";
 				}else{
 					addFieldError("fileerror", "未找到相关菜单！");
@@ -39,6 +40,7 @@ public class SearchAction extends SuperAction{
 				
 				if (searchwin(keyname)!=null && searchwin(keyname).size() != 0) {
 					reques.setAttribute("allwin", searchwin(keyname));
+					reques.setAttribute("search", "search");
 					return "searchwin_success";
 				}else{
 					addFieldError("fileerror", "未找到相关酒水！");
@@ -48,6 +50,7 @@ public class SearchAction extends SuperAction{
 				
 				if (searchin(keyname)!=null && searchin(keyname).size() != 0) {
 					reques.setAttribute("allingredient", searchin(keyname));
+					reques.setAttribute("search", "search");
 					return "searchin_success";
 				}else{
 					addFieldError("fileerror", "未找到相关配料！");
@@ -61,11 +64,22 @@ public class SearchAction extends SuperAction{
 					tablenum = Integer.parseInt(keyname);
 				} catch (NumberFormatException e) {
 					addFieldError("fileerror", "未找到相关订单！");
+					
 					return "searchorder_success";
 				}
 				
 				if (searchorder(tablenum)!=null && searchorder(tablenum).size() != 0) {
-					reques.setAttribute("allorder",searchorder(tablenum));
+					
+					List<Order> list = searchorder(tablenum);
+					if(list.size()>0){
+						double sum=0;
+						for(Order o:list){
+							sum=sum+o.getOrdercount();
+						}
+						reques.setAttribute("allorder", list);
+						reques.setAttribute("search", "search");
+						reques.setAttribute("sum", sum);
+					}
 					return "searchorder_success";
 				}else{
 					

@@ -91,6 +91,22 @@ public class CookAction extends SuperAction{
 		} catch (Exception e) {
 			e.printStackTrace();
 		} 
+		
+		
+		/**
+		 * 修改人：丁赵雷
+		 */
+		JSONArray resJSONArray = null;	//封装了要返回数据的JSONArray
+		resJSONArray = CookService.getDataDing();
+		try {
+			response.setCharacterEncoding("utf-8");
+			pw = response.getWriter();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("resJSONArray.toString()"+resJSONArray.toString());
+		pw.write(resJSONArray.toString());
 		return null;
 	}
 }

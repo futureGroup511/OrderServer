@@ -82,7 +82,7 @@ public class CookService {
 		Order order = null;
 		OrderDAO orderDAO = new OrderDAOImp();	//操作订单的事务实例
 		AlreadyGoodsDAO alreadyGoodsDAO = new AlreadyGoodsDAOImp(); //操作订单的事务实例
-		List<Order> orders = orderDAO.getNotReceiveOrder("未接收");		//获取所有未接收的订单
+		List<Order> orders = orderDAO.getUnfinishedOrder();		//获取所有未完成的订单
 		System.out.println(orders.size()+"******************************");
 		for(int i = 0;i<orders.size();i++){
 			
@@ -90,7 +90,7 @@ public class CookService {
 				itemsJSONArray = new JSONArray();
 				order = orders.get(i);		//获取当前的order对象
 				System.out.println("order"+order);
-				orderDAO.update(order.getTablenum(), "接受");
+				//orderDAO.update(order.getTablenum(), "接收");
 				JSONArray jsonArrayGET = getVegetable(order.getTablenum(),alreadyGoodsDAO);
 				vegetableJSONArray = jsonArrayGET.getJSONArray(0);	
 				numJSONArray = jsonArrayGET.getJSONArray(1);
@@ -110,6 +110,49 @@ public class CookService {
 		System.out.println("jsonArray"+jsonArray.toString());
 		return jsonArray;
 	}
+	
+	
+	
+	/**@author 丁赵雷
+	 * 返回所有的还未完成的菜的信息
+	 * @return
+	 */
+	public static JSONArray getDataDing(){
+		JSONArray jsonArray= new JSONArray();
+		JSONArray itemsJSONArray =  null;
+		JSONArray vegetableJSONArray = null;
+		JSONArray numJSONArray = null;
+		Order order = null;
+		OrderDAO orderDAO = new OrderDAOImp();	//操作订单的事务实例
+		AlreadyGoodsDAO alreadyGoodsDAO = new AlreadyGoodsDAOImp(); //操作订单的事务实例
+		List<Order> orders = orderDAO.getUnfinishedOrder();		//获取所有未完成的订单
+		System.out.println(orders.size()+"******************************");
+		for(int i = 0;i<orders.size();i++){
+			
+			try {
+				itemsJSONArray = new JSONArray();
+				order = orders.get(i);		//获取当前的order对象
+				System.out.println("order"+order);
+				JSONArray jsonArrayGET = getVegetable(order.getTablenum(),alreadyGoodsDAO);
+				vegetableJSONArray = jsonArrayGET.getJSONArray(0);	
+				numJSONArray = jsonArrayGET.getJSONArray(1);
+				System.out.println("order"+order.getTablenum());
+				itemsJSONArray.put(0,order.getTablenum());	//放入桌号
+				itemsJSONArray.put(1,order.getOrderprogress());	//放入进度
+				itemsJSONArray.put(2,vegetableJSONArray);	//放入桌号对应所有菜的名字
+				itemsJSONArray.put(3,numJSONArray);	//放入桌号对应所有菜的数量
+				System.out.println("itemsJSONArray"+itemsJSONArray.toString());
+				jsonArray.put(itemsJSONArray);
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+			
+			// itemsJSONArray;
+		}
+		System.out.println("jsonArray"+jsonArray.toString());
+		return jsonArray;
+	}
+	
 	
 	//根据相应的桌号查询相对应的菜，然后封装在jsonArray中
 	public static JSONArray getVegetable(int tablenum,AlreadyGoodsDAO alreadyGoodsDAOImp){

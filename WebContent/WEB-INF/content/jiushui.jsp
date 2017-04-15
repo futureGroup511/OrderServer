@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -99,10 +100,7 @@ function openwin2(goodsname) {
             <td height="40" align="center" valign="middle"background="../images/zitibeijing.png">                        
             <a href="<%=path%>/goods/Order_queryAllOrder"><strong>订单</strong></a></td>
           </tr>
-          <tr>
-            <td height="40" align="center" valign="middle"background="../images/zitibeijing.png">                       
-            <a href="<%=path%>/goods/Finance_reflectfinance"><strong>财务</strong></a></td>
-          </tr>
+         
           <tr>
             <td height="40" align="center" valign="middle"background="../images/zitibeijing.png">                       
             <a href="<%=path%>/goods/VsIngredient_reflectvsin"><strong>菜与配料</strong></a></td>
@@ -150,6 +148,10 @@ function openwin2(goodsname) {
             &nbsp;&nbsp;&nbsp;
             <input type="button" name="tianjia" onclick="openwin1()" value="添加新酒"/>
        </div> -->
+<<<<<<< Updated upstream
+=======
+        <c:if test="${search!='search'}">
+>>>>>>> Stashed changes
        <div class="yxdy">
            <!--  <font color="#333333">共<font color="#FF0000">5</font>页&nbsp;|&nbsp;第<font color="#FF0000">1</font>页</font> -->
             &nbsp;&nbsp;&nbsp;
@@ -158,6 +160,7 @@ function openwin2(goodsname) {
             <a href="${pageContext.request.contextPath }/goods/Win_page?number=2">下一页</a>&nbsp;|
            <!--  <a href="">末页</a> -->
        </div>
+       </c:if>
      </div>
      
 </body>

@@ -16,6 +16,8 @@ public interface OrderDAO {
 		public List<Order> getAll();
 		//获取数据库中所有的订单的信息(信息中不包含路径)
 		public List<Order> getNotReceiveOrder (String pro);
+		//获取数据库中未完成的订单的信息
+		public List<Order> getUnfinishedOrder(); 
 		
 		public List<Order> getAll(int tablenum);
 		//根据菜名删除订单
