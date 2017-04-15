@@ -21,6 +21,7 @@ public class FinanceAction extends SuperAction {
 	public String getFinance(){
 		Date date = null;
 		String strdate = reques.getParameter("date");
+		System.out.println(strdate);
 		FinanceDAO financeDAO = new FinanceDAOImp();
 		try {
 			date = parseDate(strdate);
@@ -28,9 +29,12 @@ public class FinanceAction extends SuperAction {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		double pay = financeDAO.getPay(date);
+		System.out.println(pay);
 		double income = financeDAO.getInCome(date);
-		double profit = income-pay;
+		double profit = income-pay;				
+		System.out.println(income);
 		reques.setAttribute("pay", pay);
 		reques.setAttribute("income", income);
 		reques.setAttribute("profit", profit);

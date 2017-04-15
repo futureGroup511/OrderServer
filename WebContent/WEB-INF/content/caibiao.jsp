@@ -107,10 +107,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <td height="40" align="center" valign="middle"background="../images/zitibeijing.png">                       
             <a href="<%=path%>/goods/Order_queryAllOrder"><strong>订单</strong></a></td>
           </tr>
-          <tr>
+         <%--  <tr>
             <td height="40" align="center" valign="middle"background="../images/zitibeijing.png">                       
             <a href="<%=path%>/goods/Finance_reflectfinance"><strong>财务</strong></a></td>
-          </tr>
+          </tr> --%>
           <tr>
             <td height="40" align="center" valign="middle"background="../images/zitibeijing.png">                       
             <a href="<%=path%>/goods/VsIngredient_reflectvsin"><strong>菜与配料</strong></a></td>
@@ -125,7 +125,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <td height="50" colspan="5" align="center" valign="middle" bgcolor="#7CB2D3">菜表详细信息</td>
               </tr>
               <tr align="left" valign="middle"  style="background:#E3E3E3">
-                <td width="67" height="30">选择</td>
+                
                 <td width="132" height="30">菜名</td>
                 <td width="79" height="30">价格</td>
                 <td width="281" height="30">详细描述</td>
@@ -135,7 +135,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
            
            <s:iterator  value="#request.vegetables" var="vegetable">
               <tr>
-                <td height="30"><input type="checkbox" name="xuanze" /></td>
+                <!-- <td height="30"><input type="checkbox" name="xuanze" /></td> -->
                 <td height="30"><s:property value="#vegetable.goodsname"/></td>
                 <td height="30"><s:property value="#vegetable.price"/></td>
                 <td height="30"><s:property value="#vegetable.goodsdesc"/></td>
@@ -148,13 +148,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
            <font color="red"><s:fielderror/></font>
            </table>
        </div>
-       <div class="yxdz">
+       <!-- <div class="yxdz">
             <input type="checkbox" name="quanxuan" />
             <font color="#333333">全选</font>
             <input type="button" name="shanchu"  onclick="queren()" value="删除所选菜单"/>
             &nbsp;&nbsp;&nbsp;
             <input type="button" name="tianjia" onclick="openwin1()" value="添加新菜"/>
-       </div>
+       </div> -->
        <div class="yxdy">
          <!--    <font color="#333333">共<font color="#FF0000">5</font>页&nbsp;|&nbsp;第<font color="#FF0000" > </font>页</font> -->
             &nbsp;&nbsp;&nbsp;

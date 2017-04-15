@@ -89,26 +89,25 @@ public class CookService {
 			try {
 				itemsJSONArray = new JSONArray();
 				order = orders.get(i);		//获取当前的order对象
-				
+				System.out.println("order"+order);
 				JSONArray jsonArrayGET = getVegetable(order.getTablenum(),alreadyGoodsDAO);
 				vegetableJSONArray = jsonArrayGET.getJSONArray(0);	
 				numJSONArray = jsonArrayGET.getJSONArray(1);
-		 
+				System.out.println("order"+order.getTablenum());
 				itemsJSONArray.put(0,order.getTablenum());	//放入桌号
 				itemsJSONArray.put(1,order.getOrderprogress());	//放入进度
 				itemsJSONArray.put(2,vegetableJSONArray);	//放入桌号对应所有菜的名字
-				itemsJSONArray.put(3,numJSONArray);		//放入桌号对应所有菜的数量
+				itemsJSONArray.put(3,numJSONArray);	//放入桌号对应所有菜的数量
+				System.out.println("itemsJSONArray"+itemsJSONArray.toString());
 				jsonArray.put(itemsJSONArray);
 			} catch (JSONException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			System.out.println();
-			return jsonArray;
+			
 			// itemsJSONArray;
 		}
-		
-		return null;
+		System.out.println("jsonArray"+jsonArray.toString());
+		return jsonArray;
 	}
 	
 	//根据相应的桌号查询相对应的菜，然后封装在jsonArray中

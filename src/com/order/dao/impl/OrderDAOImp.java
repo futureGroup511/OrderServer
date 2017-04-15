@@ -88,6 +88,12 @@ public class OrderDAOImp extends DAO<Order> implements OrderDAO{
 		}
 		return list;
 	}
+
+	@Override
+	public List<Order> getNotReceiveOrder() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 	

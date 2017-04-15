@@ -112,7 +112,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <td height="50" colspan="5" align="center" valign="middle" bgcolor="#7CB2D3">订单详细信息</td>
               </tr>
               <tr align="left" valign="middle"  style="background:#E3E3E3">
-                <td width="76" height="30">选择</td>
+               <!--  <td width="76" height="30">选择</td> -->
                 <td width="175" height="30">桌号</td>
                 <td width="136" height="30">总价</td>
                 <td width="165" height="30">时间</td>
@@ -121,7 +121,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
            
            <s:iterator value="#request.allorder" var="order">
               <tr>
-                <td height="30"><input type="checkbox" name="xuanze" /></td>
+               <!--  <td height="30"><input type="checkbox" name="xuanze" /></td> -->
                 <td height="30"><s:property value="#order.tablenum"/></td>
                 <td height="30"><s:property value="#order.ordercount"/></td>
                 <td height="30"><s:property value="#order.orderdate"/></td>
@@ -131,12 +131,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
            </s:iterator>
            </table>
        </div>
-       <div class="yxdz">
+       <!-- <div class="yxdz">
             <input type="checkbox" name="quanxuan" />
             <font color="#333333">全选</font>
             <input type="button" name="shanchu"  onclick="queren()" value="删除所选订单"/>
             
-       </div>
+       </div> -->
        <div class="yxdy">
            <!--  <font color="#333333">共<font color="#FF0000">5</font>页&nbsp;|&nbsp;第<font color="#FF0000">1</font>页</font> -->
             &nbsp;&nbsp;&nbsp;
