@@ -3,13 +3,10 @@ package com.order.action.cook;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import javax.servlet.ServletException;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.order.action.SuperAction;
-import com.order.dao.impl.OrderDAOImp;
 import com.order.service.CookService;
 import com.order.service.OrderService;
 import com.order.service.imp.OrderServiceImp;
@@ -75,6 +72,7 @@ public class CookAction extends SuperAction{
 			e.printStackTrace();
 		}
 		System.out.println(resJSONArray);
+		System.out.println("resJSONArray.toString()efefefefefefefefef"+resJSONArray.toString());
 		pw.write(resJSONArray.toString());
 		return null;
 	}

@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html >
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -93,11 +95,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <tr>
             <td height="40" align="center" valign="middle"background="../images/zitibeijing.png">                       
             <a href="<%=path%>/goods/Order_queryAllOrder"><font color="#FF0000">订单</font></a></td>
-          </tr>
-          <tr>
-            <td height="40" align="center" valign="middle"background="../images/zitibeijing.png">                       
-            <a href="<%=path%>/goods/Finance_reflectfinance"><strong>财务</strong></a></td>
-          </tr>
+          </tr>         
           <tr>
             <td height="40" align="center" valign="middle"background="../images/zitibeijing.png">                       
             <a href="<%=path%>/goods/VsIngredient_reflectvsin"><strong>菜与配料</strong></a></td>
@@ -107,12 +105,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      </div>
      <div class="youx">
          <div class="yxbiaoge">
+         	<div>
+         		<form action="" method="post">
+         			起始日期：<input type="date" name="start"/>
+         			截止日期：<input type="date" name="end"/>
+         			<input type="submit" value="搜索">
+         		</form>
+         		
+         	</div>
+         	<br>
          <table width="700" border="1" cellpadding="0" cellspacing="0" >
            <tr>
                 <td height="50" colspan="5" align="center" valign="middle" bgcolor="#7CB2D3">订单详细信息</td>
               </tr>
               <tr align="left" valign="middle"  style="background:#E3E3E3">
-                <td width="76" height="30">选择</td>
+               <!--  <td width="76" height="30">选择</td> -->
                 <td width="175" height="30">桌号</td>
                 <td width="136" height="30">总价</td>
                 <td width="165" height="30">时间</td>
@@ -121,22 +128,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
            
            <s:iterator value="#request.allorder" var="order">
               <tr>
-                <td height="30"><input type="checkbox" name="xuanze" /></td>
+               <!--  <td height="30"><input type="checkbox" name="xuanze" /></td> -->
                 <td height="30"><s:property value="#order.tablenum"/></td>
                 <td height="30"><s:property value="#order.ordercount"/></td>
-                <td height="30"><s:property value="#order.orderdate"/></td>
+                <td height="30"><fmt:formatDate type="both" 
+            dateStyle="medium" timeStyle="medium" 
+            value="${ order.orderdate}" /></td>               
                 <td height="30"><input type="button" onclick="queren('<s:property value="#order.tablenum"/>','<s:property value="#order.orderdate"/>')" value="删除" />
                 <input type="button" name="xiugai" onclick="openwin2('<s:property value="#order.tablenum"/>','<s:property value="#order.orderdate"/>')" value="修改"/></td>
            	 </tr>
            </s:iterator>
            </table>
        </div>
-       <div class="yxdz">
+<<<<<<< Updated upstream
+       <!-- <div class="yxdz">
             <input type="checkbox" name="quanxuan" />
             <font color="#333333">全选</font>
             <input type="button" name="shanchu"  onclick="queren()" value="删除所选订单"/>
             
-       </div>
+       </div> -->
        <div class="yxdy">
            <!--  <font color="#333333">共<font color="#FF0000">5</font>页&nbsp;|&nbsp;第<font color="#FF0000">1</font>页</font> -->
             &nbsp;&nbsp;&nbsp;
@@ -146,6 +156,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
            <!--  <a href="">末页</a> -->
        </div>
      
+=======
+       
+       <div class="yxdz">
+            <p>该页面总收入：${sum }（元）</p>           
+       </div> 
+        <c:if test="${search!='search'}">
+	       <div class="yxdy">          
+	            <a href="${pageContext.request.contextPath }/goods/Order_page?number=3">首页</a>&nbsp;|
+	            <a href="${pageContext.request.contextPath }/goods/Order_page?number=1">上一页</a>&nbsp;|
+	            <a href="${pageContext.request.contextPath }/goods/Order_page?number=2">下一页</a>&nbsp;|          
+	       </div>
+     	</c:if>
+>>>>>>> Stashed changes
      
      
 </div>

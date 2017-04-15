@@ -17,6 +17,11 @@ public class Order {
 	public Order(){
 		
 	}
+	@Override
+	public String toString() {
+		return "Order [tablenum=" + tablenum + ", ordercount=" + ordercount + ", orderdate=" + orderdate
+				+ ", orderprogress=" + orderprogress + "]";
+	}
 	public Order(int tablenum,double count,Date orderdate){
 		this.tablenum = tablenum;
 		this.ordercount = count;

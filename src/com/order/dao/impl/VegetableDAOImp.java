@@ -48,8 +48,8 @@ public class VegetableDAOImp extends DAO<BaseGoodsInfo> implements VegetableDAO{
 
 	@Override
 	public List<BaseGoodsInfo> getAll(String name) {
-		String sql ="select goodsname,goodsdesc,price from table_vs where goodsname=?";
-		return getForList(sql, name);
+		String sql ="select goodsname,goodsdesc,price from table_vs where goodsname like '%"+name+"%' ";
+		return getForList(sql);
 	}
 
 	@Override

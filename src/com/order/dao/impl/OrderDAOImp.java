@@ -47,7 +47,7 @@ public class OrderDAOImp extends DAO<Order> implements OrderDAO{
 	
 	@Override
 	public List<Order> getAll() {
-		String sql ="select tablenum,ordercount,orderprogress,orderdate from allorder";
+		String sql ="select tablenum,ordercount,orderprogress,orderdate from allorder ORDER BY orderdate DESC";
 		return getForList(sql);
 	}
 
@@ -71,7 +71,8 @@ public class OrderDAOImp extends DAO<Order> implements OrderDAO{
 
 	@Override
 	public List<Order> getAll(int tablenum) {
-		String sql ="select tablenum,ordercount,orderdate from allorder where tablenum =?";
+		
+		String sql ="select tablenum,ordercount,orderdate from allorder where tablenum =? ORDER BY orderdate DESC ";
 		return getForList(sql,tablenum);
 	}
 
@@ -90,7 +91,7 @@ public class OrderDAOImp extends DAO<Order> implements OrderDAO{
 	@Override
 	public List<Order> getPage(int pageNo,int pageSize) {
 		// TODO Auto-generated method stub
-		String sql ="select tablenum,ordercount,orderprogress,orderdate from allorder";
+		String sql ="select tablenum,ordercount,orderprogress,orderdate from allorder ";
 		CachedRowSet set=findByPage(sql, pageNo, pageSize);
 		List<Order> list=new ArrayList<>();
 		try {
@@ -124,4 +125,9 @@ public class OrderDAOImp extends DAO<Order> implements OrderDAO{
 		String sql = String.format("select * from allorder where orderprogress != '¸¶¿î' and tablenum = %s",tablenum);
 		return this.getForList(sql);
 	}
+	public List<Order> getNotReceiveOrder() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 }

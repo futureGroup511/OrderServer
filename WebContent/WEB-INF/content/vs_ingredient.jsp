@@ -99,10 +99,10 @@ function openwin2(goodsname) {
             <td height="40" align="center" valign="middle"background="../images/zitibeijing.png">                        
             <a href="<%=path%>/goods/Order_queryAllOrder"><strong>订单</strong></a></td>
           </tr>
-          <tr>
+        <%--   <tr>
             <td height="40" align="center" valign="middle"background="../images/zitibeijing.png">                       
             <a href="<%=path%>/goods/Finance_reflectfinance"><strong>财务</strong></a></td>
-          </tr>
+          </tr> --%>
           
           <tr>
             <td height="40" align="center" valign="middle"background="../images/zitibeijing.png">                       

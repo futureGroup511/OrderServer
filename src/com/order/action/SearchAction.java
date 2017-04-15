@@ -21,55 +21,69 @@ public class SearchAction extends SuperAction{
 	
 	public String search(){
 		String search = reques.getParameter("search");
-		String keyname = reques.getParameter("keyname");
+		String keyname = reques.getParameter("keyname").trim();
 		System.out.println(search);
 		System.out.println(keyname);
 		switch (search) {
-			case "涓嶇洿杈�":
+			case "菜表":
 				
 				if (searchvs(keyname)!=null && searchvs(keyname).size() != 0) {
 					reques.setAttribute("vegetables", searchvs(keyname));
+					reques.setAttribute("search", "search");
 					return "searchvs_success";
 				}else{
-					addFieldError("fileerror", "未锟揭碉拷锟斤拷氐慕锟斤拷锟斤拷锟斤拷锟斤拷");
+					addFieldError("fileerror", "未找到相关菜单！");
 					return "searchvs_success";
 				}
 				
-			case "涓嶇洿杈�1":
-				System.out.println("选锟斤拷锟剿撅拷水");
+			case "酒水":
+				
 				if (searchwin(keyname)!=null && searchwin(keyname).size() != 0) {
 					reques.setAttribute("allwin", searchwin(keyname));
+					reques.setAttribute("search", "search");
 					return "searchwin_success";
 				}else{
-					addFieldError("fileerror", "未锟揭碉拷锟斤拷氐慕锟斤拷锟斤拷锟斤拷锟斤拷");
+					addFieldError("fileerror", "未找到相关酒水！");
 					return "searchwin_success";
 				}
-			case "涓嶇洿杈�2":
-				System.out.println("选锟斤拷锟斤拷锟斤拷锟斤拷");
+			case "配料":
+				
 				if (searchin(keyname)!=null && searchin(keyname).size() != 0) {
 					reques.setAttribute("allingredient", searchin(keyname));
+					reques.setAttribute("search", "search");
 					return "searchin_success";
 				}else{
-					addFieldError("fileerror", "未锟揭碉拷锟斤拷氐慕锟斤拷锟斤拷锟斤拷锟斤拷");
+					addFieldError("fileerror", "未找到相关配料！");
 					return "searchin_success";
 				}
 				
-			case "3":
-				System.out.println("选锟斤拷锟剿讹拷锟斤拷");
+			case "订单":
+				
 				int tablenum;
 				try {
 					tablenum = Integer.parseInt(keyname);
 				} catch (NumberFormatException e) {
-					addFieldError("fileerror", "锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟截的讹拷锟斤拷锟斤拷应锟斤拷锟斤拷锟斤拷锟斤拷锟脚ｏ拷锟斤拷锟斤拷");
+					addFieldError("fileerror", "未找到相关订单！");
+					
 					return "searchorder_success";
 				}
 				
 				if (searchorder(tablenum)!=null && searchorder(tablenum).size() != 0) {
-					reques.setAttribute("allorder",searchorder(tablenum));
+					
+					List<Order> list = searchorder(tablenum);
+					if(list.size()>0){
+						double sum=0;
+						for(Order o:list){
+							sum=sum+o.getOrdercount();
+						}
+						reques.setAttribute("allorder", list);
+						reques.setAttribute("search", "search");
+						reques.setAttribute("sum", sum);
+					}
 					return "searchorder_success";
 				}else{
 					
-					addFieldError("fileerror", "未锟揭碉拷锟斤拷氐慕锟斤拷锟斤拷锟斤拷锟斤拷");
+					addFieldError("fileerror", "未找到相关订单！");
 					return "searchorder_success";
 				}
 				
