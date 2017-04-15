@@ -156,15 +156,17 @@ public class DAO<T> {
 	 * @param sql	sql查询
 	 * @param args	填充SQL查询的占位符
 	 */
-	public void update(String sql,Object ...args){
+	public boolean update(String sql,Object ...args){
 		Connection connection = null;
 		try {
 			connection = JdbcUtils.getConnection();
 			queryRunner.update(connection, sql, args);
+			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
 			JdbcUtils.releaseConnection(connection);
 		}
+		return false;
 	}
 }

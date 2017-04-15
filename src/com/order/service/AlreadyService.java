@@ -1,5 +1,6 @@
 package com.order.service;
 
+import java.sql.Timestamp;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -20,8 +21,8 @@ import com.order.domain.client.AlreadyGoods;
 import com.order.domain.client.FindSource;
 
 public class AlreadyService {
-	
-	public  static  void insert(JSONArray jsonArray){
+	/*
+	public  static  boolean insert(JSONArray jsonArray){
 		JSONObject jsonObject;
 		OrderDAO orderDAO = new OrderDAOImp();
 		Date date;
@@ -52,7 +53,45 @@ public class AlreadyService {
 		catch(Exception e){
 			e.printStackTrace();
 		}
+		return false;
 	}
+	*/
+	
+	//宋 修改
+
+	public  static  boolean insert(JSONArray jsonArray){
+		if(jsonArray.length()<2){
+			return false;
+		}
+		try {
+			JSONObject o = jsonArray.getJSONObject(0);
+			Order order = new Order();
+			order.setOrdercount(o.getDouble("ordercount"));
+			order.setOrderdate(new Timestamp(new Date().getTime()));
+			order.setOrderprogress("未接收");
+			order.setTablenum(o.getInt("tablenum"));
+			OrderDAO orderDAO = new OrderDAOImp();
+			boolean b=orderDAO.save(order);
+			if(!b){
+				return false;
+			}
+			AlreadyGoodsDAO alreadyGoodsDAO= new AlreadyGoodsDAOImp();
+			for(int i=1;i<jsonArray.length();i++){
+				JSONObject eat = (JSONObject) jsonArray.get(i);
+				AlreadyGoods alreadyGoods = new AlreadyGoods();
+				alreadyGoods.setGoodsname(eat.getString("goodsname"));
+				alreadyGoods.setNum(eat.getInt("num"));
+				alreadyGoods.setTablenum(eat.getInt("tablenum"));
+				alreadyGoodsDAO.saveAlready(alreadyGoods);
+			}
+			return true;
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
 	
 	/**
 	 * 功能：根据接收的日期和和桌号查询对应的进度

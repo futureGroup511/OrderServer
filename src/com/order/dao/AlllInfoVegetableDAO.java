@@ -11,4 +11,7 @@ public interface AlllInfoVegetableDAO {
 	
 	//返回所有酒的信息
 	public List<AlllInfoVegetable> getAllwin();
+	
+	
+	
 }

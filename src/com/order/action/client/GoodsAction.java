@@ -5,19 +5,12 @@ import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
-import javax.servlet.ServletException;
-
 import org.json.JSONArray;
-import org.json.JSONObject;
-
- 
 
 import com.order.action.SuperAction;
 import com.order.dao.AlllInfoVegetableDAO;
-import com.order.dao.impl.UserDaoImp;
 import com.order.dao.impl.VsAllInfoDaoImp;
 import com.order.domain.AlllInfoVegetable;
-import com.order.domain.client.AlreadyGoods;
 import com.order.service.AllInfoVsAndWinService;
 import com.order.service.AlreadyService;
 import com.order.utils.GetRequestParams;
@@ -29,7 +22,6 @@ public class GoodsAction extends SuperAction{
 	PrintWriter pw = null;
 	public String getvs(){
 		System.out.println("我通过访问呢进来了啊");
-		
 		try {
 			reques.setCharacterEncoding("UTF-8");
 			response.setContentType("text/json;charset=UTF-8");
@@ -78,34 +70,6 @@ public class GoodsAction extends SuperAction{
 		if (pw != null) {
 			pw.flush();  
 			pw.close(); 
-		}
-		return null;
-	}
-	
-	public String submit(){
-		JSONArray reqJsonArray=null;
-		try {
-			reqJsonArray = GetRequestParams.getRequestParams(reques, response);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
-		System.out.println("接收的请求串"+reqJsonArray.toString());
-		AlreadyService.insert(reqJsonArray);
-
-		JSONArray jsonArray = new JSONArray();
-		PrintWriter pw =null;
-		try {
-			pw = response.getWriter();
-			jsonArray.put(new JSONObject().put("key", 1));
-			System.out.println("返回的值为"+jsonArray.toString());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		pw.write(jsonArray.toString());
-		if (pw !=null) {
-			pw.flush();
-			pw.close();
 		}
 		return null;
 	}
