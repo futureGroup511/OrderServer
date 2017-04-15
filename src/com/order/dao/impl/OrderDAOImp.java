@@ -1,25 +1,48 @@
 package com.order.dao.impl;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.sql.rowset.CachedRowSet;
 
-import com.oder.domain.service.BaseGoodsInfos;
 import com.order.dao.DAO;
 import com.order.dao.OrderDAO;
+import com.order.db.JdbcUtils;
 import com.order.domain.Order;
 
 public class OrderDAOImp extends DAO<Order> implements OrderDAO{
 
+	//ï¿½Ð¶Ïµï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½
 	@Override
-	public void save(Order order) {
+	public boolean save(Order order) {
 		// TODO Auto-generated method stub
-		String sql = "insert into allorder(tablenum,ordercount,orderprogress,orderdate) value(?,?,?,?)";
-		update(sql, order.getTablenum(),order.getOrdercount(),"Î´×ö",order.getOrderdate());
-		
+		String sql1 = String.format("select * from allorder where orderprogress != '¸¶¿î' and tablenum = %s",order.getTablenum());
+		Connection conn=null;
+		Statement st = null;
+		ResultSet rs = null;
+		try {
+			conn = JdbcUtils.getConnection();
+			st=conn.createStatement();
+			rs=st.executeQuery(sql1);
+			if(rs.next()){
+				return false;
+			}else{
+				String sql = "insert into allorder(tablenum,ordercount,orderprogress,orderdate) value(?,?,?,?)";
+				return update(sql, order.getTablenum(),order.getOrdercount(),"Î´½ÓÊÕ",new Timestamp(new Date().getTime()));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			JdbcUtils.releaseConnection(conn);
+		}
+		return false;
 	}
 	
 	@Override
@@ -87,7 +110,18 @@ public class OrderDAOImp extends DAO<Order> implements OrderDAO{
 		}
 		return list;
 	}
-	
-	
-	
+
+	@Override
+	public List<Order> getNoFinish() {
+		// TODO Auto-generated method stub
+		String sql = "select * from allorder where orderprogress != '¸¶¿î'";
+		return this.getForList(sql);
+	}
+
+	@Override
+	public List<Order> getNoFinish(int tablenum) {
+		// TODO Auto-generated method stub
+		String sql = String.format("select * from allorder where orderprogress != '¸¶¿î' and tablenum = %s",tablenum);
+		return this.getForList(sql);
+	}
 }

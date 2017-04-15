@@ -21,4 +21,17 @@ public class AlreadyGoodsDAOImp extends DAO<AlreadyGoods> implements AlreadyGood
 		return getForList(sql);
 	}
 
+	@Override
+	public List<AlreadyGoods> getByTablenum(int n) {
+		// TODO Auto-generated method stub
+		String sql = "select * from already where tablenum = ?";
+		return this.getForList(sql, n);
+	}
+
+	@Override
+	public boolean deleteAll(int tablenum) {
+		// TODO Auto-generated method stub
+		return this.update("delete from already where tablenum = ?",tablenum);
+	}
+
 }

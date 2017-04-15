@@ -36,5 +36,9 @@ public class AlreadyGoods {
 		this.num = num;
 	}
 	
+	public String toJson(){
+		return String.format("{\"goodsname\":\"%s\",\"tablenum\":%s,\"num\":%s}",this.goodsname,this.tablenum,this.num);
+	}
+	
 	
 }

@@ -36,7 +36,6 @@ public class GetRequestParams {
 			}
 			br.close();
 			reqMessage = sb.toString();
-			System.out.println("ÇëÇó±¨ÎÄ:" + reqMessage);
 			reqObject = new JSONArray(reqMessage);
 		}catch (Exception e) {
 			e.printStackTrace();

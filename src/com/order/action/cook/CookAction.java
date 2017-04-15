@@ -66,8 +66,7 @@ public class CookAction extends SuperAction{
 	public String getData(){
 		//返回的数据为桌号、桌号对应的菜或者酒，菜或者酒对应的数量
 		System.out.println("访问到获得数据的方法了没有aaaa？");
-		JSONArray resJSONArray = null;	//封装了要返回数据的JSONArray
-		resJSONArray = CookService.getData();
+		JSONArray resJSONArray = CookService.getData();
 		try {
 			response.setCharacterEncoding("utf-8");
 			pw = response.getWriter();
@@ -75,6 +74,7 @@ public class CookAction extends SuperAction{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		System.out.println(resJSONArray);
 		pw.write(resJSONArray.toString());
 		return null;
 	}

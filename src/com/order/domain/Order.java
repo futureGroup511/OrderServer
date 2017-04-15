@@ -43,4 +43,10 @@ public class Order {
 	public void setOrderdate(Date orderdate) {
 		this.orderdate = orderdate;
 	}
+	
+	public String toJson(){
+		return String.format("{\"tablenum\":%s,\"ordercount\":%s,\"orderdate\":\"%s\",\"orderprogress\":\"%s\"}",this.tablenum,this.ordercount,this.orderdate,this.orderprogress);
+	}
+	
+	
 }

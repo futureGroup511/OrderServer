@@ -9,13 +9,20 @@ import com.order.domain.Order;
 public interface OrderDAO {
 	
 		//提供添加信息的方法
-		public void save(Order order);
+		public boolean save(Order order);
 		
 		
 		//获取数据库中所有的订单的信息(信息中不包含路径)
 		public List<Order> getAll();
 		
+		//获得未完成订单
+		List<Order> getNoFinish();
+		
+		//获得未完成订单
+		List<Order> getNoFinish(int tablenum);
+		
 		public List<Order> getAll(int tablenum);
+				
 		//根据菜名删除订单
 		public void delete(int tablenum,Date orderdate);
 		
@@ -33,8 +40,5 @@ public interface OrderDAO {
 
 
 		List<Order> getPage(int pageNo, int pageSize);
-
-
- 
 		
 }

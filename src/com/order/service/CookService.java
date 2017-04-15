@@ -72,7 +72,7 @@ public class CookService {
 		}
 		return resJsonObject;
 	}
-	
+	/*
 	//返回所有的菜的信息
 	public static JSONArray getData(){
 		JSONArray jsonArray= new JSONArray();
@@ -85,7 +85,6 @@ public class CookService {
 		List<Order> orders = orderDAO.getAll();		//获取所有的订单
 		System.out.println(orders.size()+"******************************");
 		for(int i = 0;i<orders.size();i++){
-			
 			try {
 				itemsJSONArray = new JSONArray();
 				order = orders.get(i);		//获取当前的order对象
@@ -108,6 +107,37 @@ public class CookService {
 			// itemsJSONArray;
 		}
 		
+		return null;
+	}
+	*/
+	
+	//返回所有的菜的信息,song修改,上方为原方法
+	public static JSONArray getData(){
+		JSONArray jsonArray= new JSONArray();
+		Order order = null;
+		OrderDAO orderDAO = new OrderDAOImp();	//操作订单的事务实例
+		AlreadyGoodsDAO alreadyGoodsDAO = new AlreadyGoodsDAOImp(); //操作订单的事务实例
+		List<Order> orders = orderDAO.getAll();		//获取所有的订单
+		System.out.println(orders.size()+"******************************");
+		for(int i = 0;i<orders.size();i++){
+			try {
+				JSONArray itemsJSONArray = new JSONArray();
+				order = orders.get(i);		//获取当前的order对象
+				
+				JSONArray jsonArrayGET = getVegetable(order.getTablenum(),alreadyGoodsDAO);
+				JSONArray vegetableJSONArray = jsonArrayGET.getJSONArray(0);	
+				JSONArray numJSONArray = jsonArrayGET.getJSONArray(1);
+		 
+				itemsJSONArray.put(0,order.getTablenum());	//放入桌号
+				itemsJSONArray.put(1,order.getOrderprogress());	//放入进度
+				itemsJSONArray.put(2,vegetableJSONArray);	//放入桌号对应所有菜的名字
+				itemsJSONArray.put(3,numJSONArray);		//放入桌号对应所有菜的数量
+				jsonArray.put(itemsJSONArray);
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+			return jsonArray;
+		}
 		return null;
 	}
 	
