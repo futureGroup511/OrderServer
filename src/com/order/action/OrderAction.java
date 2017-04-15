@@ -55,14 +55,29 @@ public class OrderAction extends SuperAction{
 		}
 		System.out.println(pageNo);
 		List<Order> list = orderDAO.getPage(pageNo, pageSize);
-		reques.setAttribute("allorder", list);
+		if(list.size()>0){
+			double sum=0;
+			for(Order o:list){
+				sum=sum+o.getOrdercount();
+			}
+			reques.setAttribute("allorder", list);
+			reques.setAttribute("sum", sum);
+		}
 		
 		return "queryallorder_success";
 		
 	}
 	public String queryAllOrder(){
 		List<Order> list = orderDAO.getAll();
-		reques.setAttribute("allorder", list);
+		if(list.size()>0){
+			double sum=0;
+			for(Order o:list){
+				sum=sum+o.getOrdercount();
+			}
+			reques.setAttribute("allorder", list);
+			reques.setAttribute("sum", sum);
+		}
+		
 		
 		return "queryallorder_success";
 	}
