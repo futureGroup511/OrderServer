@@ -82,7 +82,7 @@ public class CookService {
 		Order order = null;
 		OrderDAO orderDAO = new OrderDAOImp();	//操作订单的事务实例
 		AlreadyGoodsDAO alreadyGoodsDAO = new AlreadyGoodsDAOImp(); //操作订单的事务实例
-		List<Order> orders = orderDAO.getAll();		//获取所有的订单
+		List<Order> orders = orderDAO.getNotReceiveOrder("未接收");		//获取所有未接收的订单
 		System.out.println(orders.size()+"******************************");
 		for(int i = 0;i<orders.size();i++){
 			
@@ -90,6 +90,7 @@ public class CookService {
 				itemsJSONArray = new JSONArray();
 				order = orders.get(i);		//获取当前的order对象
 				System.out.println("order"+order);
+				orderDAO.update(order.getTablenum(), "接受");
 				JSONArray jsonArrayGET = getVegetable(order.getTablenum(),alreadyGoodsDAO);
 				vegetableJSONArray = jsonArrayGET.getJSONArray(0);	
 				numJSONArray = jsonArrayGET.getJSONArray(1);

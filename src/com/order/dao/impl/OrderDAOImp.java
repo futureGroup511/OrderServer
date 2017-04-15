@@ -1,5 +1,7 @@
 package com.order.dao.impl;
 
+import java.io.UnsupportedEncodingException;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -7,9 +9,9 @@ import java.util.List;
 
 import javax.sql.rowset.CachedRowSet;
 
-import com.oder.domain.service.BaseGoodsInfos;
 import com.order.dao.DAO;
 import com.order.dao.OrderDAO;
+import com.order.db.JdbcUtils;
 import com.order.domain.Order;
 
 public class OrderDAOImp extends DAO<Order> implements OrderDAO{
@@ -90,9 +92,16 @@ public class OrderDAOImp extends DAO<Order> implements OrderDAO{
 	}
 
 	@Override
-	public List<Order> getNotReceiveOrder() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Order> getNotReceiveOrder(String pro) {
+		String p="";
+		try {
+			p=new String(pro.getBytes(),"utf-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		System.out.println("p"+p);
+		String sql ="select * from allorder where orderprogress=?";
+		return getForList(sql,p);
 	}
 	
 	
