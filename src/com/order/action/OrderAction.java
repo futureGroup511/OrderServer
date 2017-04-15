@@ -68,7 +68,7 @@ public class OrderAction extends SuperAction{
 		
 	}
 	public String queryAllOrder(){
-		List<Order> list = orderDAO.getAll();
+		List<Order> list = orderDAO.getAllOfNum(8);
 		if(list.size()>0){
 			double sum=0;
 			for(Order o:list){

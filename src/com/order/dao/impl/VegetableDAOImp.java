@@ -26,6 +26,8 @@ public class VegetableDAOImp extends DAO<BaseGoodsInfo> implements VegetableDAO{
 		String sql ="select goodsname,goodsdesc,price from table_vs";
 		return getForList(sql);
 	}
+
+	
 	
 	@Override
 	public void delete(String name) {
@@ -75,6 +77,8 @@ public class VegetableDAOImp extends DAO<BaseGoodsInfo> implements VegetableDAO{
 		}
 		return list;
 	}
+
+	
 	
 	
 }
