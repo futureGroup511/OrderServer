@@ -14,7 +14,7 @@ public interface VegetableDAO {
 	
 	//获取数据库中所有的菜的信息(信息中不包含路径)
 	public List<BaseGoodsInfo> getAll();
-	
+		
 	public List<BaseGoodsInfo> getAll(String name);
 	//根据菜名删除菜
 	public void delete(String name);

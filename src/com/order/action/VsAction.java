@@ -2,6 +2,7 @@ package com.order.action;
 
 import java.util.List;
 
+import com.oder.domain.service.BaseGoodsInfos;
 import com.order.dao.VegetableDAO;
 import com.order.dao.impl.VegetableDAOImp;
 import com.order.domain.BaseGoodsInfo;
@@ -15,7 +16,7 @@ public class VsAction extends SuperAction {
 	private String goodsdesc;
 	//查询所有的菜的信息
 	public String queryAllVs(){
-		List<BaseGoodsInfo> baseList = vegetableDAO.getAll();
+		List<BaseGoodsInfos> baseList = vegetableDAO.getPage(1, 8);
 		reques.setAttribute("vegetables", baseList);
 		return "vsqueryall_success";
 	}

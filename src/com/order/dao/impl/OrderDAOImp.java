@@ -50,7 +50,13 @@ public class OrderDAOImp extends DAO<Order> implements OrderDAO{
 		String sql ="select tablenum,ordercount,orderprogress,orderdate from allorder ORDER BY orderdate DESC";
 		return getForList(sql);
 	}
-
+	
+	@Override
+	public List<Order> getAllOfNum(int num) {
+		String sql ="select tablenum,ordercount,orderprogress,orderdate from allorder ORDER BY orderdate DESC limit "+num;
+		return getForList(sql);
+	}
+	
 	@Override
 	public void delete(int tablenum, Date orderdate) {
 		String sql ="delete from allorder where tablenum=? and orderdate =? ";
@@ -63,6 +69,7 @@ public class OrderDAOImp extends DAO<Order> implements OrderDAO{
 		update(sql,count,newdate,tablenum,olddate);
 	}
 
+	
 	@Override
 	public Order get(int tablenum, Date orderdate) {
 		String sql = "select * from allorder where tablenum=? and orderdate=?";
@@ -75,7 +82,7 @@ public class OrderDAOImp extends DAO<Order> implements OrderDAO{
 		String sql ="select tablenum,ordercount,orderdate from allorder where tablenum =? ORDER BY orderdate DESC ";
 		return getForList(sql,tablenum);
 	}
-
+	
 	@Override
 	public String getpro(int tablenum, Date orderdate) {
 		String sql ="select orderprogress from allorder where tablenum=? and orderdate=?";
@@ -129,5 +136,13 @@ public class OrderDAOImp extends DAO<Order> implements OrderDAO{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	
+	@Override
+	public List<Order> getPageByDate(int pageNo, int pageSize, Date start, Date end) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	
 }

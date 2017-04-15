@@ -107,15 +107,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <tr>
             <td height="40" align="center" valign="middle"background="../images/zitibeijing.png">                       
             <a href="<%=path%>/goods/Order_queryAllOrder"><strong>订单</strong></a></td>
-<<<<<<< Updated upstream
-          </tr>
-         <%--  <tr>
-            <td height="40" align="center" valign="middle"background="../images/zitibeijing.png">                       
-            <a href="<%=path%>/goods/Finance_reflectfinance"><strong>财务</strong></a></td>
-          </tr> --%>
-=======
-          </tr>        
->>>>>>> Stashed changes
+
+          </tr>  
           <tr>
             <td height="40" align="center" valign="middle"background="../images/zitibeijing.png">                       
             <a href="<%=path%>/goods/VsIngredient_reflectvsin"><strong>菜与配料</strong></a></td>
@@ -160,10 +153,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             &nbsp;&nbsp;&nbsp;
             <input type="button" name="tianjia" onclick="openwin1()" value="添加新菜"/>
        </div> -->
-<<<<<<< Updated upstream
-=======
        <c:if test="${search!='search'}">
->>>>>>> Stashed changes
        <div class="yxdy">
          <!--    <font color="#333333">共<font color="#FF0000">5</font>页&nbsp;|&nbsp;第<font color="#FF0000" > </font>页</font> -->
             &nbsp;&nbsp;&nbsp;

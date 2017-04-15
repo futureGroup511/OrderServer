@@ -15,6 +15,8 @@ public interface OrderDAO {
 		//获取数据库中所有的订单的信息(信息中不包含路径)
 		public List<Order> getAll();
 		//获取数据库中所有的订单的信息(信息中不包含路径)
+		public List<Order> getAllOfNum(int num);
+		//获取数据库中所有的订单的信息(信息中不包含路径)
 		public List<Order> getNotReceiveOrder ();
 		
 		//获得未完成订单
@@ -42,5 +44,7 @@ public interface OrderDAO {
 
 
 		List<Order> getPage(int pageNo, int pageSize);
-		
+ 
+		List<Order> getPageByDate(int pageNo, int pageSize,Date start,Date end);	
+
 }

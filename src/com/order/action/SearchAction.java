@@ -1,5 +1,8 @@
 package com.order.action;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import com.order.dao.IngredientDAO;
@@ -93,7 +96,7 @@ public class SearchAction extends SuperAction{
 		return null;
 	}
 	
-	//锟斤拷询锟剿的凤拷锟斤拷
+	
 	public List<BaseGoodsInfo> searchvs(String name){
 		VegetableDAO vegetableDAO = new VegetableDAOImp();
 		List<BaseGoodsInfo> baseList = vegetableDAO.getAll(name);
@@ -102,7 +105,7 @@ public class SearchAction extends SuperAction{
 		return baseList;
 	}
 	
-	//锟斤拷询锟剿的凤拷锟斤拷
+	
 	public List<BaseGoodsInfo> searchwin(String name){
 		VegetableDAO vegetableDAO = new WinDAOImp();
 		List<BaseGoodsInfo> baseList = vegetableDAO.getAll(name);
@@ -110,7 +113,7 @@ public class SearchAction extends SuperAction{
 		return baseList;
 	}
 	
-	//锟斤拷询锟斤拷锟较的凤拷锟斤拷
+	
 	public List<Ingredient> searchin(String name){
 		IngredientDAO ingredientDAO = new IngredientDAOImp();
 		List<Ingredient> inList = ingredientDAO.getAll(name);
@@ -123,6 +126,17 @@ public class SearchAction extends SuperAction{
 		List<Order> orderlist = orderDAO.getAll(tablenum);
 		//System.out.println("锟斤拷锟角碉拷一锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷"+orderlist.get(0).getOrderdate()+"锟斤拷锟斤拷锟斤拷锟斤拷");
 		return orderlist;
+	}
+	
+	public String searchOrderByDate() throws ParseException{
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd ");  	   
+		Date start =sdf.parse(reques.getParameter("start"));
+		Date end =sdf.parse(reques.getParameter("end"));
+		System.out.println(start);
+		System.out.println(end);
+		OrderDAO orderDAO = new OrderDAOImp();
+		List<Order> orderlist = orderDAO.getPageByDate(1, 2, start, end);
+		return "searchorder_success";
 	}
 	
 }
