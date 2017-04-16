@@ -3,7 +3,6 @@ package com.order.dao;
 import java.util.Date;
 import java.util.List;
 
-import com.oder.domain.service.BaseGoodsInfos;
 import com.order.domain.Order;
 
 public interface OrderDAO {
@@ -49,6 +48,6 @@ public interface OrderDAO {
 
 		List<Order> getPage(int pageNo, int pageSize);
  
-		List<Order> getPageByDate(int pageNo, int pageSize,Date start,Date end);	
+		List<Order> getPageByDate(int pageNo, int pageSize,String start,String end);	
 
 }

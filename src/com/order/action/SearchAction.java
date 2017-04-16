@@ -22,7 +22,7 @@ public class SearchAction extends SuperAction{
 	private static final long serialVersionUID = 1L;
 	
 	
-	public String search(){
+	public String search() {
 		String search = reques.getParameter("search");
 		String keyname = reques.getParameter("keyname").trim();
 		System.out.println(search);
@@ -89,7 +89,35 @@ public class SearchAction extends SuperAction{
 					addFieldError("fileerror", "未找到相关订单！");
 					return "searchorder_success";
 				}
+			case "bydate":
+				//根据时间范围查询订单								  	   									
+				String start = reques.getParameter("start");
+				String end =reques.getParameter("end");												
+				OrderDAO orderDAO = new OrderDAOImp();
+				List<Order> allOrders=orderDAO.getPageByDate(0, 0, start, end);
+				if(allOrders.size()>0){
+					double allsum=0;//搜索时间内总共收入
+					for(Order o:allOrders){
+						allsum=allsum+o.getOrdercount();
+					}
+					List<Order> list = orderDAO.getPageByDate(1, 8, start, end);
+					System.out.println(list);
+					if(list.size()>0){
+						double sum=0;//搜索时间内分页的一个页面的总收入
+						for(Order o:list){
+							sum=sum+o.getOrdercount();
+						}
+						reques.setAttribute("bydate", "bydate");//标记根据时间搜索
+						reques.setAttribute("allorder", list);
+						reques.setAttribute("search", "search");
+						reques.getSession().setAttribute("allsum", allsum);
+						reques.setAttribute("sum", sum);
+						reques.getSession().setAttribute("startDate", start);
+						reques.getSession().setAttribute("endDate", end);
+					}
+				}
 				
+				return "searchorder_success";
 			default:
 				break;
 		}
@@ -128,15 +156,5 @@ public class SearchAction extends SuperAction{
 		return orderlist;
 	}
 	
-	public String searchOrderByDate() throws ParseException{
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd ");  	   
-		Date start =sdf.parse(reques.getParameter("start"));
-		Date end =sdf.parse(reques.getParameter("end"));
-		System.out.println(start);
-		System.out.println(end);
-		OrderDAO orderDAO = new OrderDAOImp();
-		List<Order> orderlist = orderDAO.getPageByDate(1, 2, start, end);
-		return "searchorder_success";
-	}
 	
 }
