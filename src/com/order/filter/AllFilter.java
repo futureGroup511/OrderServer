@@ -9,6 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * Servlet Filter implementation class AllFilter
@@ -38,6 +39,9 @@ public class AllFilter implements Filter {
 
 		// pass the request along the filter chain
 		HttpServletRequest req = (HttpServletRequest)request;
+        HttpServletResponse pon=(HttpServletResponse)response;
+		req.setCharacterEncoding("UTF-8");
+		pon.setCharacterEncoding("UTF-8");
 		System.out.println(req.getRemoteAddr()+":"+req.getRequestURI());
 		chain.doFilter(request, response);
 	}

@@ -22,8 +22,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   } 
   function openwin2(goodsname) { 
   window.open ("<%=path%>/goods/Vs_vsmodifyreflect.action?goodsname="+goodsname, "", 
-"height=400,width=500,top=200,left=400,menubar=no,scrollbars=no,status=no")
+	"height=400,width=500,top=200,left=400,menubar=no,scrollbars=no,status=no")
   } 
+  function er_wei_ma(goodsname) { 
+	  var path="<%=path%>/goods/VsIngredient_reWeiMa.action?goodsname="+goodsname;
+	  window.location.href = path;
+  }
   function queren(str)
 	{
 	var se=confirm("确认删除"+str+"吗!");
@@ -138,7 +142,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <td height="30"><s:property value="#vegetable.price"/></td>
                 <td height="30"><s:property value="#vegetable.goodsdesc"/></td>
                 <td height="30"><input type="button" onclick="queren('<s:property value="#vegetable.goodsname"/>')" value="删除" />
-                <input type="button" name="xiugai" onclick="openwin2('<s:property value="#vegetable.goodsname"/>')" value="修改" /></td>
+                <input type="button" name="xiugai" onclick="openwin2('<s:property value="#vegetable.goodsname"/>')" value="修改" />
+                <input type="button" name="er" onclick="er_wei_ma('<s:property value="#vegetable.goodsname"/>')" value="生成二维码" />
+                </td>
            	</tr>
            
            </s:iterator>
