@@ -23,7 +23,7 @@ public class OrderSubmitAction extends SuperAction{
 			e.printStackTrace();
 		}
 		response.setContentType("text/html;charset=utf8");
-		System.out.println(reqJsonArray);
+		System.out.println("orderSubmit:"+reqJsonArray);
 		
 		boolean b = AlreadyService.insert(reqJsonArray);
 		PrintWriter pw = null;

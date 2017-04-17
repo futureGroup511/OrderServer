@@ -129,5 +129,13 @@ public class OrderDAOImp extends DAO<Order> implements OrderDAO{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public List<Order> getToday() {
+		// TODO Auto-generated method stub
+		//String sql ="select * from allorder where DATE_FORMAT(FROM_UNIXTIME(orderdate),'%Y-%m-%d')= DATE_FORMAT(NOW(),'%Y-%m-%d')";
+		String sql ="select * from allorder where date(orderdate) = curdate()";
+		return getForList(sql);
+	}
 	
 }

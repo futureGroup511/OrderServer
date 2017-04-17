@@ -15,6 +15,8 @@ public interface OrderDAO {
 		//获取数据库中所有的订单的信息(信息中不包含路径)
 		public List<Order> getAll();
 		//获取数据库中所有的订单的信息(信息中不包含路径)
+		public List<Order> getToday();
+		//获取数据库中所有的订单的信息(信息中不包含路径)
 		public List<Order> getNotReceiveOrder ();
 		
 		//获得未完成订单
