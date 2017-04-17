@@ -2,16 +2,17 @@ package com.order.domain;
 
 public class VsInRelative {
 	
+
 	private String vsname;
-	private String inname;
+	private String ingrename;
 	private int num;
 	
 	public VsInRelative(){
 		
 	}
-	public VsInRelative(String vsname,String inname,int num){
+	public VsInRelative(String vsname,String ingrename,int num){
 		this.vsname = vsname;
-		this.inname = inname;
+		this.ingrename = ingrename;
 		this.num = num;
 	}
 	public String getVsname() {
@@ -20,11 +21,16 @@ public class VsInRelative {
 	public void setVsname(String vsname) {
 		this.vsname = vsname;
 	}
-	public String getInname() {
-		return inname;
+
+	@Override
+	public String toString() {
+		return "VsInRelative [vsname=" + vsname + ", ingrename=" + ingrename + ", num=" + num + "]";
 	}
-	public void setInname(String inname) {
-		this.inname = inname;
+	public String getIngrename() {
+		return ingrename;
+	}
+	public void setIngrename(String ingrename) {
+		this.ingrename = ingrename;
 	}
 	public int getNum() {
 		return num;

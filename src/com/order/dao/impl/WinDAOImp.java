@@ -77,7 +77,7 @@ public class WinDAOImp extends DAO<BaseGoodsInfo> implements VegetableDAO{
 		}
 		return list;
 	}
-	
-	
+
+		
 	
 }

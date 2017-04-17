@@ -1,6 +1,9 @@
 package com.order.dao.impl;
 
+
+import java.io.UnsupportedEncodingException;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -11,10 +14,12 @@ import java.util.List;
 
 import javax.sql.rowset.CachedRowSet;
 
+import com.mysql.jdbc.PreparedStatement;
 import com.order.dao.DAO;
 import com.order.dao.OrderDAO;
 import com.order.db.JdbcUtils;
 import com.order.domain.Order;
+import com.sun.org.apache.xpath.internal.operations.Or;
 
 public class OrderDAOImp extends DAO<Order> implements OrderDAO{
 
@@ -50,7 +55,13 @@ public class OrderDAOImp extends DAO<Order> implements OrderDAO{
 		String sql ="select tablenum,ordercount,orderprogress,orderdate from allorder ORDER BY orderdate DESC";
 		return getForList(sql);
 	}
-
+	
+	@Override
+	public List<Order> getAllOfNum(int num) {
+		String sql ="select tablenum,ordercount,orderprogress,orderdate from allorder ORDER BY orderdate DESC limit "+num;
+		return getForList(sql);
+	}
+	
 	@Override
 	public void delete(int tablenum, Date orderdate) {
 		String sql ="delete from allorder where tablenum=? and orderdate =? ";
@@ -63,6 +74,7 @@ public class OrderDAOImp extends DAO<Order> implements OrderDAO{
 		update(sql,count,newdate,tablenum,olddate);
 	}
 
+	
 	@Override
 	public Order get(int tablenum, Date orderdate) {
 		String sql = "select * from allorder where tablenum=? and orderdate=?";
@@ -75,7 +87,7 @@ public class OrderDAOImp extends DAO<Order> implements OrderDAO{
 		String sql ="select tablenum,ordercount,orderdate from allorder where tablenum =? ORDER BY orderdate DESC ";
 		return getForList(sql,tablenum);
 	}
-
+	
 	@Override
 	public String getpro(int tablenum, Date orderdate) {
 		String sql ="select orderprogress from allorder where tablenum=? and orderdate=?";
@@ -113,6 +125,29 @@ public class OrderDAOImp extends DAO<Order> implements OrderDAO{
 	}
 
 	@Override
+	public List<Order> getNotReceiveOrder(String pro) {
+		String p="";
+		try {
+			p=new String(pro.getBytes(),"utf-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		System.out.println("p"+p);
+		String sql ="select * from allorder where orderprogress=?";
+		return getForList(sql,p);
+	}
+
+	/**
+	 * 获取数据库中所有未完成的菜单
+	 * @author 丁赵雷
+	 */
+	@Override
+	public List<Order> getUnfinishedOrder() {
+		String q="未接收"; 
+		String w="接收"; 
+		String sql ="select * from allorder where orderprogress=? or orderprogress=?";
+		return getForList(sql,q,w);
+	}
 	public List<Order> getNoFinish() {
 		// TODO Auto-generated method stub
 		String sql = "select * from allorder where orderprogress != '付款'";
@@ -122,12 +157,8 @@ public class OrderDAOImp extends DAO<Order> implements OrderDAO{
 	@Override
 	public List<Order> getNoFinish(int tablenum) {
 		// TODO Auto-generated method stub
-		String sql = String.format("select * from allorder where orderprogress != '付款' and tablenum = %s",tablenum);
+		String sql = "select * from allorder where tablenum = ?";
 		return this.getForList(sql);
-	}
-	public List<Order> getNotReceiveOrder() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override
@@ -137,5 +168,56 @@ public class OrderDAOImp extends DAO<Order> implements OrderDAO{
 		String sql ="select * from allorder where date(orderdate) = curdate()";
 		return getForList(sql);
 	}
-	
+	@Override
+	public List<Order> getPageByDate(int pageNo, int pageSize, String start, String end) {
+		/*select * from order where timestamp between  UNIX_TIMESTAMP('2013-05-01 00:00:00') and UNIX_TIMESTAMP('2013-05-10 00:00:00');*/
+		/*select top 10* from表名 where 主键not in (select top 20 表名 from 主键);--查询显示21-30条记录（10条）*/
+		
+		String sql ="select tablenum,ordercount,orderprogress,orderdate from allorder where orderdate between  '"+start+"' and '"+end+"' ";
+		
+		List<Order> list=new ArrayList<>();
+		try {
+			try {
+				Class.forName("com.mysql.jdbc.Driver");
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/order?useUnicode=true&amp;characterEncoding=utf8",
+					"root","root");
+			PreparedStatement ps=(PreparedStatement) conn.prepareStatement(sql);
+			ResultSet rs=ps.executeQuery();
+			
+			while(rs.next()){
+				Order od=new Order();
+				od.setTablenum(rs.getInt("tablenum"));
+				od.setOrdercount(rs.getDouble("ordercount"));
+				od.setOrderdate(rs.getDate("orderdate"));
+				od.setOrderprogress(rs.getString("orderprogress"));
+				list.add(od);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(pageNo==0 && pageSize==0){
+			return list;
+		}
+		else if(pageNo*pageSize%8==0 && pageNo*pageSize<list.size()){
+			list=list.subList((pageNo-1)*pageSize, pageNo*pageSize);
+		}
+		else{
+			list=list.subList((pageNo-1)*pageSize,list.size());
+		}
+		System.out.println(list);
+		
+		return list;
+	}
+
+	@Override
+	public List<Order> getNotReceiveOrder() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

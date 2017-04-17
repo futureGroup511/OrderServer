@@ -1,5 +1,8 @@
 package com.order.action;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import com.order.dao.IngredientDAO;
@@ -19,7 +22,7 @@ public class SearchAction extends SuperAction{
 	private static final long serialVersionUID = 1L;
 	
 	
-	public String search(){
+	public String search() {
 		String search = reques.getParameter("search");
 		String keyname = reques.getParameter("keyname").trim();
 		System.out.println(search);
@@ -86,14 +89,42 @@ public class SearchAction extends SuperAction{
 					addFieldError("fileerror", "未找到相关订单！");
 					return "searchorder_success";
 				}
+			case "bydate":
+				//根据时间范围查询订单								  	   									
+				String start = reques.getParameter("start");
+				String end =reques.getParameter("end");												
+				OrderDAO orderDAO = new OrderDAOImp();
+				List<Order> allOrders=orderDAO.getPageByDate(0, 0, start, end);
+				if(allOrders.size()>0){
+					double allsum=0;//搜索时间内总共收入
+					for(Order o:allOrders){
+						allsum=allsum+o.getOrdercount();
+					}
+					List<Order> list = orderDAO.getPageByDate(1, 8, start, end);
+					System.out.println(list);
+					if(list.size()>0){
+						double sum=0;//搜索时间内分页的一个页面的总收入
+						for(Order o:list){
+							sum=sum+o.getOrdercount();
+						}
+						reques.setAttribute("bydate", "bydate");//标记根据时间搜索
+						reques.setAttribute("allorder", list);
+						reques.setAttribute("search", "search");
+						reques.getSession().setAttribute("allsum", allsum);
+						reques.setAttribute("sum", sum);
+						reques.getSession().setAttribute("startDate", start);
+						reques.getSession().setAttribute("endDate", end);
+					}
+				}
 				
+				return "searchorder_success";
 			default:
 				break;
 		}
 		return null;
 	}
 	
-	//锟斤拷询锟剿的凤拷锟斤拷
+	
 	public List<BaseGoodsInfo> searchvs(String name){
 		VegetableDAO vegetableDAO = new VegetableDAOImp();
 		List<BaseGoodsInfo> baseList = vegetableDAO.getAll(name);
@@ -102,7 +133,7 @@ public class SearchAction extends SuperAction{
 		return baseList;
 	}
 	
-	//锟斤拷询锟剿的凤拷锟斤拷
+	
 	public List<BaseGoodsInfo> searchwin(String name){
 		VegetableDAO vegetableDAO = new WinDAOImp();
 		List<BaseGoodsInfo> baseList = vegetableDAO.getAll(name);
@@ -110,7 +141,7 @@ public class SearchAction extends SuperAction{
 		return baseList;
 	}
 	
-	//锟斤拷询锟斤拷锟较的凤拷锟斤拷
+	
 	public List<Ingredient> searchin(String name){
 		IngredientDAO ingredientDAO = new IngredientDAOImp();
 		List<Ingredient> inList = ingredientDAO.getAll(name);
@@ -124,5 +155,6 @@ public class SearchAction extends SuperAction{
 		//System.out.println("锟斤拷锟角碉拷一锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷"+orderlist.get(0).getOrderdate()+"锟斤拷锟斤拷锟斤拷锟斤拷");
 		return orderlist;
 	}
+	
 	
 }

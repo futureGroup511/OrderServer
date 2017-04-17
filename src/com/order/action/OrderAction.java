@@ -27,7 +27,7 @@ public class OrderAction extends SuperAction{
 	private double ordercount;
 	private Date date;
 	private static Date olddate;
-	public String page(){
+	public String page(){		
 		int number=3;
 		 
 		String numbers=ServletActionContext.getRequest().getParameter("number");
@@ -67,8 +67,62 @@ public class OrderAction extends SuperAction{
 		return "queryallorder_success";
 		
 	}
+	public String pageByDate(){	
+		int number=3;
+		 
+		String numbers=ServletActionContext.getRequest().getParameter("number");
+		String start=(String) reques.getSession().getAttribute("startDate");
+		String end=(String) reques.getSession().getAttribute("endDate");
+		if(numbers!=null&&!numbers.equals(""))
+		{
+			  number=Integer.parseInt(numbers);
+			
+		}
+		
+		if(number==1){
+			pageNo--;
+			if(pageNo<1){
+				pageNo=1;
+			}
+	
+		 
+		}
+		if(number==2){
+			int count=orderDAO.getPageByDate(0, 0,start,end).size();
+			if(count>(pageNo*pageSize+1)){				
+				pageNo++;
+			}else{
+				if(pageNo!=1){
+					pageNo--;
+					if(count<pageNo*pageSize && pageNo!=1){
+						pageNo--;
+					}
+				}
+			}
+			
+		}
+		if(number==3){
+			pageNo=1;
+		
+		}
+		
+		System.out.println(pageNo);
+		List<Order> list = orderDAO.getPageByDate(pageNo, pageSize,start,end);
+		if(list.size()>0){
+			double sum=0;
+			for(Order o:list){
+				sum=sum+o.getOrdercount();
+			}
+			reques.setAttribute("bydate", "bydate");//标记根据时间搜索
+			reques.setAttribute("allorder", list);
+			reques.setAttribute("search", "search");			
+			reques.setAttribute("sum", sum);
+		}
+		
+		return "queryallorder_success";
+	}
 	public String queryAllOrder(){
-		List<Order> list = orderDAO.getAll();
+		List<Order> list = orderDAO.getAllOfNum(8);
 		if(list.size()>0){
 			double sum=0;
 			for(Order o:list){
@@ -95,8 +149,7 @@ public class OrderAction extends SuperAction{
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		
 		try {
-			date = simpleDateFormat.parse(strdatetime);	//锟斤拷玫锟斤拷锟斤拷诓锟斤拷锟轿�16-x-x,锟斤拷锟皆憋拷锟斤拷锟斤拷锟绞ｏ拷锟侥诧拷锟街诧拷锟斤拷转锟斤拷锟斤拷锟斤拷要锟侥革拷式
-			System.out.println(date+"******锟斤拷锟斤拷遣锟斤拷锟�***********");
+			date = simpleDateFormat.parse(strdatetime);	
 			tablenum = Integer.parseInt(strtablenum);
 			ordercount = Double.parseDouble(strordercount);
 			//System.out.println(date);

@@ -24,8 +24,10 @@ public class OrderServiceImp implements OrderService{
 			//调用DAO层相应的方法将修改相应的字段
 			OrderDAO orderDAO = new OrderDAOImp();
 			if (progressStr.equals("1")) {
+				System.out.println(1);
 				orderDAO.update(tablenum, RECEPT);
 			}else {
+				System.out.println(2);
 				orderDAO.update(tablenum, FINISH);
 			}
 			

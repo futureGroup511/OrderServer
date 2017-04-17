@@ -3,7 +3,6 @@ package com.order.dao;
 import java.util.Date;
 import java.util.List;
 
-import com.oder.domain.service.BaseGoodsInfos;
 import com.order.domain.Order;
 
 public interface OrderDAO {
@@ -18,6 +17,13 @@ public interface OrderDAO {
 		public List<Order> getToday();
 		//获取数据库中所有的订单的信息(信息中不包含路径)
 		public List<Order> getNotReceiveOrder ();
+
+		public List<Order> getNotReceiveOrder (String pro);
+		//获取数据库中未完成的订单的信息
+		public List<Order> getUnfinishedOrder(); 
+
+		public List<Order> getAllOfNum(int num);
+
 		
 		//获得未完成订单
 		List<Order> getNoFinish();
@@ -44,5 +50,7 @@ public interface OrderDAO {
 
 
 		List<Order> getPage(int pageNo, int pageSize);
-		
+ 
+		List<Order> getPageByDate(int pageNo, int pageSize,String start,String end);	
+
 }

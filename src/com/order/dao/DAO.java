@@ -1,5 +1,6 @@
 package com.order.dao;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.sql.Connection;
@@ -7,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.sql.rowset.CachedRowSet;
@@ -17,14 +19,6 @@ import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
-
- 
-
-
-
-
-
-
 
 import com.opensymphony.xwork2.Result;
 import com.order.db.JdbcUtils;
@@ -91,6 +85,7 @@ public class DAO<T> {
 		
 		return null;
 	}
+	
 	
 	/**
 	 * 返回对应的T的实例的对象

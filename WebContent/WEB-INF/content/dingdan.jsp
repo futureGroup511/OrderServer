@@ -106,7 +106,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      <div class="youx">
          <div class="yxbiaoge">
          	<div>
-         		<form action="" method="post">
+         		<form action="${pageContext.request.contextPath }/goods/Search_search.action?search=bydate&keyname=''" method="post">
          			起始日期：<input type="date" name="start"/>
          			截止日期：<input type="date" name="end"/>
          			<input type="submit" value="搜索">
@@ -140,35 +140,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
            </s:iterator>
            </table>
        </div>
-<<<<<<< Updated upstream
-       <!-- <div class="yxdz">
-            <input type="checkbox" name="quanxuan" />
-            <font color="#333333">全选</font>
-            <input type="button" name="shanchu"  onclick="queren()" value="删除所选订单"/>
-            
-       </div> -->
-       <div class="yxdy">
-           <!--  <font color="#333333">共<font color="#FF0000">5</font>页&nbsp;|&nbsp;第<font color="#FF0000">1</font>页</font> -->
-            &nbsp;&nbsp;&nbsp;
-            <a href="${pageContext.request.contextPath }/goods/Order_page?number=3">首页</a>&nbsp;|
-            <a href="${pageContext.request.contextPath }/goods/Order_page?number=1">上一页</a>&nbsp;|
-            <a href="${pageContext.request.contextPath }/goods/Order_page?number=2">下一页</a>&nbsp;|
-           <!--  <a href="">末页</a> -->
-       </div>
-     
-=======
-       
-       <div class="yxdz">
-            <p>该页面总收入：${sum }（元）</p>           
-       </div> 
-        <c:if test="${search!='search'}">
+
+       <c:if test="${search!='search'}">
 	       <div class="yxdy">          
 	            <a href="${pageContext.request.contextPath }/goods/Order_page?number=3">首页</a>&nbsp;|
 	            <a href="${pageContext.request.contextPath }/goods/Order_page?number=1">上一页</a>&nbsp;|
 	            <a href="${pageContext.request.contextPath }/goods/Order_page?number=2">下一页</a>&nbsp;|          
 	       </div>
      	</c:if>
->>>>>>> Stashed changes
+     	<c:if test="${bydate=='bydate'}">
+	       <div class="yxdy">          
+	            <a href="${pageContext.request.contextPath }/goods/Order_pageByDate?number=3">首页</a>&nbsp;|
+	            <a href="${pageContext.request.contextPath }/goods/Order_pageByDate?number=1">上一页</a>&nbsp;|
+	            <a href="${pageContext.request.contextPath }/goods/Order_pageByDate?number=2">下一页</a>&nbsp;|          
+	       </div>
+     	</c:if>
+       <div class="yxdz">
+            <p>该页面总收入：${sum }（元）</p>  
+            <c:if test="${bydate=='bydate'}">
+            	<p>${startDate} 到 ${endDate } 总收入：${allsum }（元）</p>
+            </c:if>         
+       </div> 
+        
+
      
      
 </div>

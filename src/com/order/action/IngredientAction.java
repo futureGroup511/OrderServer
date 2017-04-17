@@ -60,7 +60,7 @@ public class IngredientAction extends SuperAction {
 	}
 	
 	public String queryallin(){
-		List<Ingredient> list = ingredientDAO.getAll();
+		List<Ingredient> list = ingredientDAO.getPage(pageNo, pageSize);
 		reques.setAttribute("allingredient", list);
 		return "queryallin_success";
 	}
