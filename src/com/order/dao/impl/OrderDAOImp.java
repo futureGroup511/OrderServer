@@ -19,11 +19,9 @@ import com.order.dao.DAO;
 import com.order.dao.OrderDAO;
 import com.order.db.JdbcUtils;
 import com.order.domain.Order;
-import com.sun.org.apache.xpath.internal.operations.Or;
 
 public class OrderDAOImp extends DAO<Order> implements OrderDAO{
 
-	//�жϵ�ǰ�����Ƿ���
 	@Override
 	public boolean save(Order order) {
 		// TODO Auto-generated method stub
@@ -157,11 +155,17 @@ public class OrderDAOImp extends DAO<Order> implements OrderDAO{
 	@Override
 	public List<Order> getNoFinish(int tablenum) {
 		// TODO Auto-generated method stub
-		return null;
+		String sql = "select * from allorder where tablenum = ?";
+		return this.getForList(sql);
 	}
 
-
-	
+	@Override
+	public List<Order> getToday() {
+		// TODO Auto-generated method stub
+		//String sql ="select * from allorder where DATE_FORMAT(FROM_UNIXTIME(orderdate),'%Y-%m-%d')= DATE_FORMAT(NOW(),'%Y-%m-%d')";
+		String sql ="select * from allorder where date(orderdate) = curdate()";
+		return getForList(sql);
+	}
 	@Override
 	public List<Order> getPageByDate(int pageNo, int pageSize, String start, String end) {
 		/*select * from order where timestamp between  UNIX_TIMESTAMP('2013-05-01 00:00:00') and UNIX_TIMESTAMP('2013-05-10 00:00:00');*/
@@ -208,5 +212,10 @@ public class OrderDAOImp extends DAO<Order> implements OrderDAO{
 		return list;
 	}
 
-	
+	@Override
+	public List<Order> getNotReceiveOrder() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

@@ -24,7 +24,7 @@ public class OrderTodayAction extends SuperAction{
 		// TODO Auto-generated method stub
 		OrderDAO orderDAO = new OrderDAOImp();
 		JSONArray jsonArray = new JSONArray();
-		List<Order> orders = orderDAO.getAll();
+		List<Order> orders = orderDAO.getToday();
 		AlreadyGoodsDAO alreadyGoodsDAO = new AlreadyGoodsDAOImp();
 		for(Order o:orders){
 			JSONArray one = new JSONArray();

@@ -113,11 +113,13 @@ public class GoodsAction extends SuperAction{
 			reques.setCharacterEncoding("UTF-8");
 			response.setContentType("text/json;charset=UTF-8");
 			reqjsonArray =  GetRequestParams.getRequestParams(reques, response);
+			System.out.println("goods_findsource:"+reqjsonArray);
 			resJosnArray = AlreadyService.getSource(reqjsonArray);
 			
 			pw = response.getWriter();
 			//System.out.println(resJosnArray.toString()+"******的事发生的******");
 			pw.write(resJosnArray.toString());
+			System.out.println(resJosnArray.toString());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
