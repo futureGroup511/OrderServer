@@ -11,7 +11,10 @@ import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
+import com.oder.domain.service.BaseGoodsInfos;
+import com.order.dao.VegetableDAO;
 import com.order.dao.VsInRelativeDAO;
+import com.order.dao.impl.VegetableDAOImp;
 import com.order.dao.impl.VsInRelativeImp;
 import com.order.domain.VsInRelative;
 
@@ -23,7 +26,7 @@ public class VsIngredientAction extends SuperAction{
 	private String ingrename;
 	private String strnum;
 	private int num;
-	
+	VegetableDAO vegetableDAO = new VegetableDAOImp();
 	public String reflectvsin(){
 		return "reflectvsin";
 	}
@@ -65,45 +68,50 @@ public class VsIngredientAction extends SuperAction{
 	
 	
 	//生成一个二维码
-	public void reWeiMa(){
+	public String reWeiMa(){
 		String goodsName = reques.getParameter("goodsname");
 
 		VsInRelativeDAO v = new VsInRelativeImp();
 		List<VsInRelative> list=v.getPeiliao(goodsName);
 		StringBuffer sbf=new StringBuffer();
-		
-		sbf.append(goodsName+"配料：");
-		for(int i=0;i<list.size();i++){
-			sbf.append(list.get(i).getIngrename()+"    "+list.get(i).getNum()+"份    ");
-		}
-		String content=sbf.toString();
-		
-		
-		int width = 300;//二维码图片的宽度
-		int height = 300;//二维码图片的高度
-		String format = "png";//二维码格式
-		
-		//定义二维码内容参数
-		HashMap hints = new HashMap();
-		//设置字符集编码格式
-		hints.put(EncodeHintType.CHARACTER_SET, "UTF-8");
-		//设置容错等级，在这里我们使用M级别
-		hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.M);
-		//设置边框距
-		hints.put(EncodeHintType.MARGIN, 2);
-		
-		//生成二维码
-		try {
-			//指定二维码内容
-			BitMatrix bitMatrix = new MultiFormatWriter().encode(content, BarcodeFormat.QR_CODE, width, height,hints);
-			//指定生成图片的保存路径
-			Path file = new File("D:/"+goodsName+".png").toPath();
+		if(list!=null){
+			sbf.append(goodsName+"  配料：");
+			for(int i=0;i<list.size();i++){
+				sbf.append(list.get(i).getIngrename()+"    "+list.get(i).getNum()+"份    ");
+			}
+			String content=sbf.toString();
+			
+			
+			int width = 300;//二维码图片的宽度
+			int height = 300;//二维码图片的高度
+			String format = "png";//二维码格式
+			
+			//定义二维码内容参数
+			HashMap hints = new HashMap();
+			//设置字符集编码格式
+			hints.put(EncodeHintType.CHARACTER_SET, "UTF-8");
+			//设置容错等级，在这里我们使用M级别
+			hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.M);
+			//设置边框距
+			hints.put(EncodeHintType.MARGIN, 2);
+			
 			//生成二维码
-			MatrixToImageWriter.writeToPath(bitMatrix, format, file);
-		} catch (Exception e) {
-			e.printStackTrace();
+			try {
+				//指定二维码内容
+				BitMatrix bitMatrix = new MultiFormatWriter().encode(content, BarcodeFormat.QR_CODE, width, height,hints);
+				//指定生成图片的保存路径
+				Path file = new File("D:/"+goodsName+".png").toPath();
+				//生成二维码
+				MatrixToImageWriter.writeToPath(bitMatrix, format, file);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
 		}
-		
+		List<BaseGoodsInfos> baseList = vegetableDAO.getPage(1, 8);
+		//System.out.println(baseList.get(1).getGoodsname());
+		reques.setAttribute("vegetables", baseList);
+		return "vsqueryall_success";
 		
 	}
 	

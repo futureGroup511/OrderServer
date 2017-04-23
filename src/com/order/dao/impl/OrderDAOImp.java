@@ -19,11 +19,9 @@ import com.order.dao.DAO;
 import com.order.dao.OrderDAO;
 import com.order.db.JdbcUtils;
 import com.order.domain.Order;
-import com.sun.org.apache.xpath.internal.operations.Or;
 
 public class OrderDAOImp extends DAO<Order> implements OrderDAO{
 
-	//�жϵ�ǰ�����Ƿ���
 	@Override
 	public boolean save(Order order) {
 		// TODO Auto-generated method stub
