@@ -101,16 +101,16 @@ public class AlreadyService {
 		JSONObject jsonObject;
 		JSONArray rejsonArray=new JSONArray();
 		int tablenum = 0;
-		Date date= null;
+		Date date= new Date();
 		try {
 			//获得带有桌号和日期的jsonobject
 			jsonObject = jsonArray.getJSONObject(0);			
 			tablenum = Integer.parseInt(jsonObject.getString("tablenum"));
 			
-			String strdate = jsonObject.getString("date");	//客户端传过来的精确到秒的时间
+			//String strdate = jsonObject.getString("date");	//客户端传过来的精确到秒的时间
 			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			ParsePosition pos = new ParsePosition(0);
-			date = formatter.parse(strdate, pos);
+			//date = formatter.parse(new Date().toString(), pos);
 			
 			OrderDAO orderDAO = new OrderDAOImp();
 			String  orderprogress = orderDAO.getpro(tablenum, date);

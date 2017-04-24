@@ -50,8 +50,9 @@ public class OrderDAOImp extends DAO<Order> implements OrderDAO{
 	
 	@Override
 	public List<Order> getAll() {
-		String sql ="select tablenum,ordercount,orderprogress,orderdate from allorder ORDER BY orderdate DESC";
-		return getForList(sql);
+		String a="付款";
+		String sql ="select tablenum,ordercount,orderprogress,orderdate from allorder where orderprogress !=? ORDER BY orderdate DESC";
+		return getForList(sql,a);
 	}
 	
 	@Override
@@ -143,7 +144,8 @@ public class OrderDAOImp extends DAO<Order> implements OrderDAO{
 	public List<Order> getUnfinishedOrder() {
 		String q="未接收"; 
 		String w="接收"; 
-		String sql ="select * from allorder where orderprogress=? or orderprogress=?";
+		String v="付款";
+		String sql ="select * from allorder where orderprogress=? or orderprogress=? ";
 		return getForList(sql,q,w);
 	}
 	public List<Order> getNoFinish() {
@@ -156,7 +158,7 @@ public class OrderDAOImp extends DAO<Order> implements OrderDAO{
 	public List<Order> getNoFinish(int tablenum) {
 		// TODO Auto-generated method stub
 		String sql = "select * from allorder where tablenum = ?";
-		return this.getForList(sql);
+		return this.getForList(sql,tablenum);
 	}
 
 	@Override

@@ -41,6 +41,7 @@ public class LoginServletAction extends SuperAction{
 		String password = user.getString("password");
 		CustomerDao customerDao = new CustomerDaoImp();
 		Customer customer = customerDao.login(username, password);
+		System.out.println(customer==null);
 		if(null == customer){
 			response.getWriter().append("[{\"userId\":0}]");
 		}else{

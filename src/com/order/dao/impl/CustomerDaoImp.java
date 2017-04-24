@@ -8,6 +8,7 @@ public class CustomerDaoImp extends DAO<Customer> implements CustomerDao {
 
 	@Override
 	public Customer login(String username, String password) {
+		System.out.println(username+password);
 		// TODO Auto-generated method stub
 		if(null == username || null ==password ){
 			return null;

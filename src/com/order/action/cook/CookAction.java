@@ -71,7 +71,7 @@ public class CookAction extends SuperAction{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		System.out.println(resJSONArray);
 		pw.write(resJSONArray.toString());
 		return null;
 	}

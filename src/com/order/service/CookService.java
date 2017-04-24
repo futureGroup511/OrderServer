@@ -136,9 +136,9 @@ public class CookService {
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
-			return jsonArray;
+			
 		}
-		return null;
+		return jsonArray;
 	}
 	
 	
