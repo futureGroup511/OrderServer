@@ -59,6 +59,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
        </div>
         <p align="center"  style="margin-top:70px"><font color="#858585">未来工作室</font></p>
    </div>
- 
+ <div/>
 </body>
 </html>
