@@ -14,16 +14,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script language="JavaScript">
 		
 		
-		function subform(){
+	/* 	function subform(){
 		   	
 			 window.opener.location.reload(); 
 		     window.close();//关闭窗口
 		   	
-		    <%-- //window.opener.location.href='<%=path%>/goods/Vs_queryAllVs'; --%>
-		   /* 	window.opener.location.href = window.opener.location.href;
-		    window.close();   */
-		    
-		 } 
+		  	    
+		 }  */
 		
 		
 	</script>
@@ -33,7 +30,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <body>
     <div class="box">
        <div class="xinxi">
-       <form action="<%=path %>/goods/Ingredient_addingredient" method="post"  enctype="multipart/form-data"  onsubmit="subform();">
+       <form action="<%=path %>/goods/Ingredient_addingredient" method="post"  enctype="multipart/form-data" >
        <table width="400" border="0" cellspacing="0">
   <tr>
     <td height="44" valign="middle"><font color="#666666">名称</font></td>

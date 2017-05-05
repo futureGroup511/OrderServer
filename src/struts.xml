@@ -50,6 +50,11 @@
 			<param name="savePath">D:\webworkplace\OrderServer\WebContent\goodsimages</param>
 			
 			<result name="uploadvs_success" type="chain">Vs_queryAllVs</result><!-- chain表示一个链接的动作，相当于页面刷新 -->
+			
+			<result name="uploadvs_vs" >/WEB-INF/content/tianjiacaibiao.jsp</result>
+			<result name="uploadvs_win" >/WEB-INF/content/tianjiajiushui.jsp</result>
+			<result name="ingredient_add">/WEB-INF/content/tianjiapeiliao.jsp</result>
+			
 			<result name="addingredient_success" type="chain">Ingredient_queryallin</result><!-- chain表示一个链接的动作，相当于页面刷新 -->
 			<result name="input" type="chain">Vs_queryAllVs</result>
 			

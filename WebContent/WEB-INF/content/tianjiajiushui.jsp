@@ -14,7 +14,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 	<script language="JavaScript">
 		
-		
+		/* 
 		function subform(){
 		   	
 			 window.opener.location.reload(); 
@@ -24,17 +24,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    
 		 } 
 		
-		
+		 */
 	</script>
 
 
 
 </head>
 
-<body onunload="window.opener.location.reload();">
+<body >
    <div class="box">
        <div class="xinxi">
-       <form action="<%=path%>/goods/Upload_uploadvs" method="post" enctype="multipart/form-data"  onsubmit="subform();">
+       <form action="<%=path%>/goods/Upload_uploadvs" method="post" enctype="multipart/form-data"  >
        <table width="400" border="0"  cellspacing="0">
           <tr>
             <td height="40" valign="middle"><font color="#666666">酒名</font></td>

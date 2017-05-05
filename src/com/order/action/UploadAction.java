@@ -126,11 +126,13 @@ public class UploadAction extends SuperAction {
 		if (type.equals("1")) {
 			System.out.println("我要添加菜表了啊");
 			insertVs();
+			return "uploadvs_vs";
 		}else{
 			System.out.println("我添加酒水了啊");
 			insertWin();
+			return "uploadvs_win";
 		}
-		return "uploadvs_success";
+		
 	}
 	
 	
