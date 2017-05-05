@@ -9,7 +9,7 @@ import com.order.dao.IngredientDAO;
 import com.order.dao.impl.IngredientDAOImp;
 import com.order.domain.Ingredient;
 
-import sun.management.VMOptionCompositeData;
+/*import sun.management.VMOptionCompositeData;*/
 
 public class IndgredientDAOTest {
 	

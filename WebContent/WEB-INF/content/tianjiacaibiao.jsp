@@ -5,7 +5,7 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html >
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -16,23 +16,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		
 		
 		function subform(){
-		   
+			
+			
+			 document.getElementById("f").submit();	
 		     window.close();//关闭窗口
 		   	 window.opener.location.reload(); 
-		    <%-- //window.opener.location.href='<%=path%>/goods/Vs_queryAllVs'; --%>
-		   /* 	window.opener.location.href = window.opener.location.href;
-		    window.close();   */
-		    
+		    	   
 		 } 
 		
 	</script>
 
 </head>
 
-<body onunload="window.opener.location.reload();">			<!--  -->
+<body onunload="window.opener.location.reload();">			
     <div class="box">
        <div class="xinxi">
-       <form action="<%=path%>/goods/Upload_uploadvs" method="post" enctype="multipart/form-data" onsubmit="subform();">
+       <form id="f" name="f" action="<%=path%>/goods/Upload_uploadvs" method="post" onsubmit="subform()" enctype="multipart/form-data" >
        <table width="400" border="0"  cellspacing="0">
 	        <tr>
 	            <td height="40" valign="middle"><font color="#666666">菜名:</font></td>
@@ -54,12 +53,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           
           <div class="anniu">
           <tr>
-            <td height="55" align="center" valign="middle"><input type="reset" name="chongzhi" value="重置" /></td>
-            <td align="center" valign="middle"><input type="submit" name="tijiao" value="提交" />  </td>
+            <td height="55" align="center" valign="middle"><input type="reset"  value="重置" /></td>
+            <td align="center" valign="middle"><input type="submit"   value="提交" />  </td>
           </tr>
           </div>
           
         </table>
+        
     </form>
     </div>
     </div>

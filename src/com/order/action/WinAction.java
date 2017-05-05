@@ -54,7 +54,7 @@ public class WinAction extends SuperAction {
 	}
 	
 	public String queryAllWin(){
-		List<BaseGoodsInfos> baseList = winDao.getPage(pageNo, pageSize);
+		List<BaseGoodsInfos> baseList = winDao.getPage(1, pageSize);
 		reques.setAttribute("allwin",baseList);
 		return "queryallwin_success";
 	}

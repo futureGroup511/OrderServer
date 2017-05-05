@@ -13,7 +13,7 @@ import com.order.dao.OrderDAO;
 import com.order.dao.impl.IngredientDAOImp;
 import com.order.dao.impl.OrderDAOImp;
 import com.order.domain.Ingredient;
-import com.sun.org.apache.bcel.internal.generic.RETURN;
+/*import com.sun.org.apache.bcel.internal.generic.RETURN;*/
 
 public class IngredientAction extends SuperAction {
 
@@ -60,7 +60,7 @@ public class IngredientAction extends SuperAction {
 	}
 	
 	public String queryallin(){
-		List<Ingredient> list = ingredientDAO.getPage(pageNo, pageSize);
+		List<Ingredient> list = ingredientDAO.getPage(1, pageSize);
 		reques.setAttribute("allingredient", list);
 		return "queryallin_success";
 	}
