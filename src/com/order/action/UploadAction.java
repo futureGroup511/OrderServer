@@ -9,7 +9,7 @@ import com.order.domain.AlllInfoVegetable;
 
 
 public class UploadAction extends SuperAction {
-
+	
 	private static final long serialVersionUID = 1L;
 	
 	private String goodsname;
@@ -90,11 +90,12 @@ public class UploadAction extends SuperAction {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} 
+		
 	}
 	
 	//初始化请求的信息
 	public void init(){
-		System.out.println("这个到底执行了没有啊");
+		System.out.println("添加这个到底执行了没有啊");
 		goodsname = reques.getParameter("goodsname");
 		goodsdesc = reques.getParameter("goodsdesc");
 		strprice = reques.getParameter("price");
@@ -108,14 +109,17 @@ public class UploadAction extends SuperAction {
 	}
 	
 	public void insertVs(){
+		System.out.println("--vs");
 		AlllInfoVegetable alllInfoVegetable = new AlllInfoVegetable(goodsname, goodsdesc, strprice, uploadFileName);
 		vsDao.save(alllInfoVegetable);
 	}
 	public void insertWin(){
+		System.out.println("--win");
 		AlllInfoVegetable alllInfoVegetable = new AlllInfoVegetable(goodsname, goodsdesc, strprice, uploadFileName);
 		winDao.save(alllInfoVegetable);
 	}
 	public String uploadvs(){
+		System.out.println("&&&&&&&&&&&&&&&&&&&&&&");
 		init();
 		System.out.println("初始化结束");
 		upload();

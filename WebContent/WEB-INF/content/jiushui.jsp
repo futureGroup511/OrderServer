@@ -146,8 +146,9 @@ function openwin2(goodsname) {
             <font color="#333333">全选</font>
             <input type="button" name="shanchu" onclick="queren()" value="删除所选酒水"/>
             &nbsp;&nbsp;&nbsp;
-            <input type="button" name="tianjia" onclick="openwin1()" value="添加新酒"/>
-       </div> -->
+            </div> -->
+            <input type="button" name="tianjia" onclick="openwin1()" value="添加新酒" style="margin-left: 100px;margin-top: 10px;"/>
+       
         <c:if test="${search!='search'}">
        <div class="yxdy">
            <!--  <font color="#333333">共<font color="#FF0000">5</font>页&nbsp;|&nbsp;第<font color="#FF0000">1</font>页</font> -->

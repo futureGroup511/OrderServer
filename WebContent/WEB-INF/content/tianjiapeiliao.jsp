@@ -60,8 +60,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </tr>
   <div class="anniu">
   <tr>
-    <td height="38" align="center" valign="middle"><input type="reset" name="chongzhi" value="重置" /></td>
-    <td align="center" valign="middle"><input type="submit"name="tijiao" value="提交" />  </td>
+    <td height="38" align="center" valign="middle"><input type="reset"  value="重置" /></td>
+    <td align="center" valign="middle"><input type="submit" value="提交" />  </td>
   </tr>
   </div>
 </table>

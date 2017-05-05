@@ -155,9 +155,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <input type="checkbox" name="quanxuan" />
             <font color="#333333">全选</font>
             <input type="button" name="shanchu"  onclick="queren()" value="删除所选菜单"/>
-            &nbsp;&nbsp;&nbsp; -->
-            <input type="button" name="tianjia" onclick="openwin1()" value="添加新菜"/>
-       </div>
+ -->
+        <input type="button" name="tianjia" onclick="openwin1()" value="添加新菜" style="margin-left: 100px;margin-top: 10px;"/>
+      
+
        <c:if test="${search!='search'}">
        <div class="yxdy">
          <!--    <font color="#333333">共<font color="#FF0000">5</font>页&nbsp;|&nbsp;第<font color="#FF0000" > </font>页</font> -->
