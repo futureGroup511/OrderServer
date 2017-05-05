@@ -111,7 +111,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <tr>
             <td height="40" align="center" valign="middle"background="../images/zitibeijing.png">                       
             <a href="<%=path%>/goods/Order_queryAllOrder"><strong>订单</strong></a></td>
-
           </tr>  
           <tr>
             <td height="40" align="center" valign="middle"background="../images/zitibeijing.png">                       
@@ -156,9 +155,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <input type="checkbox" name="quanxuan" />
             <font color="#333333">全选</font>
             <input type="button" name="shanchu"  onclick="queren()" value="删除所选菜单"/>
-            &nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp; -->
             <input type="button" name="tianjia" onclick="openwin1()" value="添加新菜"/>
-       </div> -->
+       </div>
        <c:if test="${search!='search'}">
        <div class="yxdy">
          <!--    <font color="#333333">共<font color="#FF0000">5</font>页&nbsp;|&nbsp;第<font color="#FF0000" > </font>页</font> -->

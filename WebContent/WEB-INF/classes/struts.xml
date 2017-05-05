@@ -42,7 +42,7 @@
 				<!-- 配置允许上传的文件类型 -->
 				<param name="allowedTypes">image/png,image/jpg,image/jpeg</param>
 				<!-- 配置允许上传的文件的大小 -->
-				<!-- <param name="maximumSize">4096</param> 不添加此设置默认上传文件最大值为2M-->
+				 <param name="maximumSize">500000</param><!--  不添加此设置默认上传文件最大值为2M-->
 			</interceptor-ref>
 			<!-- 配置默认的拦截器 -->
 			<interceptor-ref name="defaultStack"/>

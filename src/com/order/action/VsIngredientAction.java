@@ -1,9 +1,18 @@
 package com.order.action;
 
+import java.awt.image.BufferedImage;
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.nio.file.Path;
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.List;
+
+import javax.imageio.ImageIO;
+import javax.servlet.ServletOutputStream;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
@@ -35,7 +44,7 @@ public class VsIngredientAction extends SuperAction{
 		try {
 			initParam();
 		} catch (Exception e) {
-			addFieldError("filleerror", "ÇëÄúÔÚÊäÈë¿òÖĞÊäÈëÕûÊı£¡£¡");
+			addFieldError("filleerror", "è¯·æ‚¨åœ¨è¾“å…¥æ¡†ä¸­è¾“å…¥æ•´æ•°ï¼ï¼");
 			return "addrelative_success";
 		}
 		VsInRelativeDAO vsInRelativeDAO = new VsInRelativeImp();
@@ -59,62 +68,118 @@ public class VsIngredientAction extends SuperAction{
 	
 	/**
 	 * @param strnum
-	 * @throws Exception Òì³£ÉÏÅ×£¬½»¸øµ÷ÓÃµÄ´¦ÀíÂß¼­µÄ·½·¨£¬
-	 * Âß¼­·½·¨´¦ÀíÒì³£·µ»Ø´íÎóĞÅÏ¢¸øÓÃ»§
+	 * @throws Exception å¼‚å¸¸ä¸ŠæŠ›ï¼Œäº¤ç»™è°ƒç”¨çš„å¤„ç†é€»è¾‘çš„æ–¹æ³•ï¼Œ
+	 * é€»è¾‘æ–¹æ³•å¤„ç†å¼‚å¸¸è¿”å›é”™è¯¯ä¿¡æ¯ç»™ç”¨æˆ·
 	 */
 	public void parse(String strnum) throws Exception{
 		num = Integer.parseInt(strnum);
 	}
 	
 	
-	//Éú³ÉÒ»¸ö¶şÎ¬Âë
-	public String reWeiMa(){
+	//ç”Ÿæˆä¸€ä¸ªäºŒç»´ç 
+/*	public void reWeiMa(){
 		String goodsName = reques.getParameter("goodsname");
+		ServletOutputStream stream = null;
 
 		VsInRelativeDAO v = new VsInRelativeImp();
 		List<VsInRelative> list=v.getPeiliao(goodsName);
 		StringBuffer sbf=new StringBuffer();
 		if(list!=null){
-			sbf.append(goodsName+"  ÅäÁÏ£º");
+			sbf.append(goodsName+"  é…æ–™ï¼š");
 			for(int i=0;i<list.size();i++){
-				sbf.append(list.get(i).getIngrename()+"    "+list.get(i).getNum()+"·İ    ");
+				sbf.append(list.get(i).getIngrename()+"    "+list.get(i).getNum()+"ä»½    ");
 			}
 			String content=sbf.toString();
 			
 			
-			int width = 300;//¶şÎ¬ÂëÍ¼Æ¬µÄ¿í¶È
-			int height = 300;//¶şÎ¬ÂëÍ¼Æ¬µÄ¸ß¶È
-			String format = "png";//¶şÎ¬Âë¸ñÊ½
+			int width = 300;//äºŒç»´ç å›¾ç‰‡çš„å®½åº¦
+			int height = 300;//äºŒç»´ç å›¾ç‰‡çš„é«˜åº¦
+			String format = "png";//äºŒç»´ç æ ¼å¼
 			
-			//¶¨Òå¶şÎ¬ÂëÄÚÈİ²ÎÊı
+			//å®šä¹‰äºŒç»´ç å†…å®¹å‚æ•°
 			HashMap hints = new HashMap();
-			//ÉèÖÃ×Ö·û¼¯±àÂë¸ñÊ½
+			//è®¾ç½®å­—ç¬¦é›†ç¼–ç æ ¼å¼
 			hints.put(EncodeHintType.CHARACTER_SET, "UTF-8");
-			//ÉèÖÃÈİ´íµÈ¼¶£¬ÔÚÕâÀïÎÒÃÇÊ¹ÓÃM¼¶±ğ
+			//è®¾ç½®å®¹é”™ç­‰çº§ï¼Œåœ¨è¿™é‡Œæˆ‘ä»¬ä½¿ç”¨Mçº§åˆ«
 			hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.M);
-			//ÉèÖÃ±ß¿ò¾à
+			//è®¾ç½®è¾¹æ¡†è·
 			hints.put(EncodeHintType.MARGIN, 2);
 			
-			//Éú³É¶şÎ¬Âë
+			//ç”ŸæˆäºŒç»´ç 
 			try {
-				//Ö¸¶¨¶şÎ¬ÂëÄÚÈİ
+				//æŒ‡å®šäºŒç»´ç å†…å®¹
 				BitMatrix bitMatrix = new MultiFormatWriter().encode(content, BarcodeFormat.QR_CODE, width, height,hints);
-				//Ö¸¶¨Éú³ÉÍ¼Æ¬µÄ±£´æÂ·¾¶
-				Path file = new File("D:/"+goodsName+".png").toPath();
-				//Éú³É¶şÎ¬Âë
-				MatrixToImageWriter.writeToPath(bitMatrix, format, file);
+
+				stream = response.getOutputStream();
+				//ç”ŸæˆäºŒç»´ç 
+				MatrixToImageWriter.writeToStream(bitMatrix, format, stream);
+				stream.close();
 			} catch (Exception e) {
 				e.printStackTrace();
+				
 			}
 			
 		}
 		List<BaseGoodsInfos> baseList = vegetableDAO.getPage(1, 8);
 		//System.out.println(baseList.get(1).getGoodsname());
 		reques.setAttribute("vegetables", baseList);
-		return "vsqueryall_success";
+		//return "vsqueryall_success";
 		
+	}*/
+	
+	
+	public void reWeiMa() throws IOException{
+		//è®¾ç½®é¡µé¢ä¸ç¼“å­˜
+		response.setHeader("Pragma","No-cache");
+		response.setHeader("Cache-Control","no-cache");
+		response.setDateHeader("Expires", 0);
+
+		BufferedImage image=null;
+		String goodsName = reques.getParameter("goodsname");
+		ServletOutputStream stream = null;
+		//äºŒç»´ç çš„å›¾ç‰‡æ ¼å¼ 
+		String format = "gif"; 
+		VsInRelativeDAO v = new VsInRelativeImp();
+		List<VsInRelative> list=v.getPeiliao(goodsName);
+		StringBuffer sbf=new StringBuffer();
+		if(list!=null){
+			sbf.append(goodsName+"  é…æ–™ï¼š");
+			for(int i=0;i<list.size();i++){
+				sbf.append(list.get(i).getIngrename()+"    "+list.get(i).getNum()+"ä»½    ");
+			}
+			String content=sbf.toString();
+			int width2 = 200; 
+			int height2 = 200; 
+			
+			Hashtable hints = new Hashtable(); 
+			//å†…å®¹æ‰€ä½¿ç”¨ç¼–ç  
+			hints.put(EncodeHintType.CHARACTER_SET, "utf-8"); 
+			
+			try{
+				BitMatrix bitMatrix = new MultiFormatWriter().encode(content,BarcodeFormat.QR_CODE, width2, height2, hints);
+				
+				int width = bitMatrix.getWidth(); 
+				int height = bitMatrix.getHeight(); 
+				image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB); 
+				for (int x = 0; x < width; x++) { 
+					for (int y = 0; y < height; y++) { 
+						image.setRGB(x, y, bitMatrix.get(x, y) ? 0xFF000000 : 0xFFFFFFFF); //äºŒç»´ç å›¾ç‰‡ä¸ºé»‘ç™½ä¸¤è‰²
+					} 
+				}
+				//ImageIO.write(image,"gif",response.getOutputStream());
+			}catch (Exception e) {
+				// TODO: handle exception
+			}
+		}
+		//åªæœ‰ç”¨è¿™ç§è§£ç æ–¹å¼æ‰ä¸å‡ºç°ä¹±ç 
+		String s="attachment;filename="+new String(goodsName.getBytes("gb2312"),"ISO8859-1")+".gif";
+		response.addHeader("Content-Disposition",s);
+		OutputStream os=new BufferedOutputStream(response.getOutputStream());
+		response.setContentType("image/gif");
+		ImageIO.write(image,format,os);
+		os.flush();
+		os.close();
+
+
 	}
-	
-	
-	
 }
