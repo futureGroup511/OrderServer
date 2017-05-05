@@ -133,7 +133,7 @@ public class IngredientAction extends SuperAction {
 		}
 		Ingredient ingredient = new Ingredient(goodsname,goodssource,buyindate,price,num);
 		ingredientDAO.save(ingredient);
-		return "addingredient_success";
+		return "ingredient_add";
 	}
 	
 }
