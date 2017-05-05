@@ -18,7 +18,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		function subform(){
 			
 			
-			 document.getElementById("f").submit();	
+			// document.getElementById("f").submit();	onunload="window.opener.location.reload();"
 		     window.close();//关闭窗口
 		   	 window.opener.location.reload(); 
 		    	   
@@ -28,10 +28,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 </head>
 
-<body onunload="window.opener.location.reload();">			
+<body >			
     <div class="box">
        <div class="xinxi">
-       <form id="f" name="f" action="<%=path%>/goods/Upload_uploadvs" method="post" onsubmit="subform()" enctype="multipart/form-data" >
+       <form id="f" name="f" action="<%=path%>/goods/Upload_uploadvs" method="post"  enctype="multipart/form-data" >
        <table width="400" border="0"  cellspacing="0">
 	        <tr>
 	            <td height="40" valign="middle"><font color="#666666">菜名:</font></td>
