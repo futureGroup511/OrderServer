@@ -20,11 +20,12 @@ public class VsInRelativeImp extends DAO<VsInRelative> implements VsInRelativeDA
 		String good="";
 		try {
 			good=new String(goodsName.getBytes(),"utf-8");
+			//System.out.println("good  "+good);
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
 		String sql="select * from vs_ingredient where vsname=?";
-		return getForList(sql,good);
+		return getForList(sql,goodsName);
 	}
 	
 }

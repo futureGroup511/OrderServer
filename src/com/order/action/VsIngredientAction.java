@@ -21,6 +21,7 @@ import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import com.oder.domain.service.BaseGoodsInfos;
+import com.opensymphony.xwork2.util.logging.Logger;
 import com.order.dao.VegetableDAO;
 import com.order.dao.VsInRelativeDAO;
 import com.order.dao.impl.VegetableDAOImp;
@@ -141,13 +142,16 @@ public class VsIngredientAction extends SuperAction{
 		String format = "gif"; 
 		VsInRelativeDAO v = new VsInRelativeImp();
 		List<VsInRelative> list=v.getPeiliao(goodsName);
+		System.out.println("list "+list.size());
 		StringBuffer sbf=new StringBuffer();
 		if(list!=null){
-			sbf.append(goodsName+"  配料：");
+			sbf.append(goodsName+"配料:");
 			for(int i=0;i<list.size();i++){
-				sbf.append(list.get(i).getIngrename()+"    "+list.get(i).getNum()+"份    ");
+				System.out.println(list.get(i));
+				sbf.append(list.get(i).getIngrename()+""+list.get(i).getNum()+"份");
 			}
 			String content=sbf.toString();
+			//String content = "哈哈我是宋民举啊，测试啊";
 			int width2 = 200; 
 			int height2 = 200; 
 			
