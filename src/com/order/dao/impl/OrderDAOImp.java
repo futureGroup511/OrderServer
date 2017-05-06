@@ -133,7 +133,7 @@ public class OrderDAOImp extends DAO<Order> implements OrderDAO{
 		}
 		System.out.println("p"+p);
 		String sql ="select * from allorder where orderprogress=?";
-		return getForList(sql,p);
+		return getForList(sql,pro);
 	}
 
 	/**
@@ -163,43 +163,14 @@ public class OrderDAOImp extends DAO<Order> implements OrderDAO{
 
 	@Override
 	public List<Order> getToday() {
-		// TODO Auto-generated method stub
-		//String sql ="select * from allorder where DATE_FORMAT(FROM_UNIXTIME(orderdate),'%Y-%m-%d')= DATE_FORMAT(NOW(),'%Y-%m-%d')";
+		
 		String sql ="select * from allorder where date(orderdate) = curdate()";
 		return getForList(sql);
 	}
 	@Override
-	public List<Order> getPageByDate(int pageNo, int pageSize, String start, String end) {
-		/*select * from order where timestamp between  UNIX_TIMESTAMP('2013-05-01 00:00:00') and UNIX_TIMESTAMP('2013-05-10 00:00:00');*/
-		/*select top 10* from表名 where 主键not in (select top 20 表名 from 主键);--查询显示21-30条记录（10条）*/
-		
-		String sql ="select tablenum,ordercount,orderprogress,orderdate from allorder where orderdate between  '"+start+"' and '"+end+"' ";
-		
-		List<Order> list=new ArrayList<>();
-		try {
-			try {
-				Class.forName("com.mysql.jdbc.Driver");
-			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/order?useUnicode=true&amp;characterEncoding=utf8",
-					"root","root");
-			PreparedStatement ps=(PreparedStatement) conn.prepareStatement(sql);
-			ResultSet rs=ps.executeQuery();
-			
-			while(rs.next()){
-				Order od=new Order();
-				od.setTablenum(rs.getInt("tablenum"));
-				od.setOrdercount(rs.getDouble("ordercount"));
-				od.setOrderdate(rs.getDate("orderdate"));
-				od.setOrderprogress(rs.getString("orderprogress"));
-				list.add(od);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public List<Order> getPageByDate(int pageNo, int pageSize, String start, String end) {		
+		String sql ="select tablenum,ordercount,orderprogress,orderdate from allorder where orderdate between  '"+start+"' and '"+end+"'";		 		
+		List<Order> list=getForList(sql);;		
 		if(pageNo==0 && pageSize==0){
 			return list;
 		}
